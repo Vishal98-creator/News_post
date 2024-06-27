@@ -1,40 +1,39 @@
-import { NavigateNext } from "@mui/icons-material";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
-import { COLORS } from "../../constants";
+import Card2 from "../../components/Card2";
 import { makeStyles } from "@mui/styles";
-import Card3 from "../../components/Card3";
+import { COLORS } from "../../constants";
+import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 
-const NewsPost = ({ cardData }) => {
+const Popularposts = ({ cardData }) => {
   const classes = useStyles();
+
   return (
     <>
       <Box sx={{ mt: 5 }}>
-        <Box display={"flex"} justifyContent={"space-between"}>
+        <Box display={'flex'} justifyContent={'space-between'}>
           <Box varient="h4" className={classes.sectionTitle}>
-            Нови
+            Популярни
           </Box>
           <Box>
-            <Button sx={{ marginLeft: 2 }}>
-              Виж всички
-              <NavigateNext />
-            </Button>
+            <Button><NavigateBefore/></Button>
+            <Button sx={{marginLeft:2}}><NavigateNext/></Button>
           </Box>
         </Box>
         <Grid container spacing={2}>
-          {cardData?.map((card, i) => {
+          {cardData.map((card, i) => {
             return (
               <Grid
                 key={i}
                 item
                 xs={12}
-                sm={12}
-                md={6}
+                sm={6}
+                md={3}
                 display={"flex"}
                 justifyContent={"center"}
                 sx={{ boxShadow: "rgba(0, 0, 0, 0.07)" }}
               >
-                <Card3 cardData={card} />
+                <Card2 cardData={card} />
               </Grid>
             );
           })}
@@ -44,7 +43,7 @@ const NewsPost = ({ cardData }) => {
   );
 };
 
-export default NewsPost;
+export default Popularposts;
 
 const useStyles = makeStyles((theme) => ({
   sectionTitle: {
