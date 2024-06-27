@@ -1,24 +1,23 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 
-export default function Card1({ cardData }) {
+export default function Card2({ cardData }) {
   const classes = useStyles();
   return (
-    <Card className={classes.cardcontainer} sx={{ borderRadius: "12px" }}>
+    <Card sx={{ mt: 5, width: 360 }}>
       <CardMedia
-        component="img"
-        height="100%"
         image={cardData.bgImg}
-        alt="Paella dish"
+        title="green iguana"
+        className={classes.cardImg}
       />
       <CardContent className={classes.cardcontent}>
         <Typography variant="h5">{cardData.title}</Typography>
-        <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
+        <Typography variant="body2" sx={{ mt: 2, color: COLORS.lightGray }}>
           {cardData.description}
         </Typography>
       </CardContent>
@@ -27,21 +26,19 @@ export default function Card1({ cardData }) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  cardcontainer: {
-    maxWidth: "100%",
-    height: "452px",
-    position: "relative",
+  cardImg: {
+    margin: "auto",
+    marginTop: "18px",
+    marginBottom: "0px",
     borderRadius: "12px",
-    width: "100%",
+    width: "340px",
+    height: "262px",
   },
   cardcontent: {
-    position: "absolute",
-    bottom: 0,
-    height: "117px",
     borderRadius: "12px",
-    backgroundColor: "rgba(255, 255, 255, 0.75)",
-    margin: "10px",
+    margin: "0px 0px",
     color: "black",
     width: "-webkit-fill-available",
+    height: "117px",
   },
 }));

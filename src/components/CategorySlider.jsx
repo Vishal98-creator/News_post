@@ -29,9 +29,10 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
     >
       <Box
         sx={{
+          backgroundColor: "rgb(245, 245, 245)",
           display: "flex",
           transition: "margin 0.3s ease-in-out",
-          marginLeft: `-${currentIndex * 30}px`,
+          marginLeft: `-${currentIndex * 45}px`,
           whiteSpace: "nowrap",
           gap: "20px",
           // width: `${categories.length * 180}px`, // Adjust the width dynamically
@@ -42,14 +43,21 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
           disabled={currentIndex === 0}
           sx={{
             position: "absolute",
-            left: "10px",
+            left: "0px",
             zIndex: 1,
             height: "48px",
-            minWidth: "48px",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            minWidth: "90px",
+            fontSize: "1.5rem",
+            background:
+              "linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 5))",
+            transition: "background-color 0.3s ease", // Smooth transition for hover effect
             "&:hover": {
-              backgroundColor: "rgba(255, 255, 255, 1)",
+              background:
+                "linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1.5))",
+              // Adjust the gradient colors and opacity as needed
+              boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)", // Adding a subtle box shadow for shading
             },
+
             display: currentIndex === 0 ? "none" : "inline-flex",
           }}
         >
@@ -78,10 +86,10 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
                 image={category.image}
                 alt="topTags"
                 sx={{
-                  filter: "brightness(100%)", // Apply brightness filter to fade the image
                   filter: "blur(2px)", // Apply blur effect to the image
                   objectFit: "cover", // Ensure the image covers the entire CardMedia container
                   objectPosition: "center top", // Position the image within the CardMedia container
+                  filter: "brightness(70%)", // Apply brightness filter to fade the image
                 }}
               />
               <Typography
@@ -126,14 +134,21 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
         onClick={handleNext}
         disabled={currentIndex === TOP_CATEGORIES.length - 1}
         sx={{
+          color: "rgb(62, 50, 50)",
           position: "absolute",
-          right: "10px",
+          right: "0px",
           zIndex: 1,
           height: "48px",
-          minWidth: "48px",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          minWidth: "90px",
+          fontSize: "1.5rem",
+          background:
+            "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 5))",
+          transition: "background-color 0.3s ease", // Smooth transition for hover effect
           "&:hover": {
-            backgroundColor: "rgba(255, 255, 255, 1)",
+            background:
+              "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1.5))",
+            // Increase the opacity towards the right
+            boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)", // Adding a subtle box shadow for shading
           },
           display:
             currentIndex >= TOP_CATEGORIES.length - 1 ? "none" : "inline-flex",
