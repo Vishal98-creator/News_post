@@ -1,7 +1,6 @@
 import { NavigateNext } from "@mui/icons-material";
 import { Box, Button, Grid } from "@mui/material";
 import React from "react";
-import Card2 from "../../components/Card2";
 import { COLORS } from "../../constants";
 import { makeStyles } from "@mui/styles";
 import Card3 from "../../components/Card3";

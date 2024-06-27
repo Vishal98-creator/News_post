@@ -6,18 +6,18 @@ import sportImg from "../../assets/images/sport.png";
 import laptopImg from "../../assets/images/laptop.png";
 import pinkbgCar from "../../assets/images/pinkbg-car.png";
 import foodImg from "../../assets/images/foodImg.png";
-
 import mobileImg from "../../assets/images/mobile.png";
 import boatsImg from "../../assets/images/boats.png";
 import rabitImg from "../../assets/images/rabit.png";
 import bluebgCar from "../../assets/images/bluebg-car.png";
 import crossImges from "../../assets/images/crossImges.png";
 import musicalMan from "../../assets/images/musicalMan.png";
-
 import Popularposts from "./Popularposts";
 import SportWidget from "./SportWidget";
 import { Grid } from "@mui/material";
 import NewsPost from "./NewsPost";
+import CategorySlider from "../../components/CategorySlider";
+import { TOP_CATEGORIES } from "../../constants";
 
 const TopViewCardData = [
   {
@@ -34,16 +34,6 @@ const TopViewCardData = [
 
 const PopularPostCardData = [
   {
-    bgImg: sportImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: laptopImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
     bgImg: pinkbgCar,
     title: "Заглавие на новина",
     description: "Началото на статията....",
@@ -53,9 +43,39 @@ const PopularPostCardData = [
     title: "Заглавие на новина",
     description: "Началото на статията....",
   },
+  {
+    bgImg: musicGirl,
+    title: "Заглавие на новина",
+    description: "Началото на статията....",
+  },
+  {
+    bgImg: laptopImg,
+    title: "Заглавие на новина",
+    description: "Началото на статията....",
+  },
+  {
+    bgImg: blackbgcar,
+    title: "Заглавие на новина",
+    description: "Началото на статията....",
+  },
+  {
+    bgImg: rabitImg,
+    title: "Заглавие на новина",
+    description: "Началото на статията....",
+  },
+  {
+    bgImg: mobileImg,
+    title: "Заглавие на новина",
+    description: "Началото на статията....",
+  },
+  {
+    bgImg: sportImg,
+    title: "Заглавие на новина",
+    description: "Началото на статията....",
+  },
 ];
 
-const newsPostCard =  [
+const newsPostCard = [
   {
     bgImg: mobileImg,
     title: "Заглавие на новина",
@@ -92,11 +112,12 @@ const Index = () => {
   const [cardData, setCardData] = useState(TopViewCardData);
   return (
     <>
-      <Grid display={"flex"} flexDirection={'column'} spacing={5}>
+      <Grid display={"flex"} flexDirection={"column"} spacing={5}>
+        <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
         <TopView cardData={cardData} />
         <Popularposts cardData={PopularPostCardData} />
         <SportWidget />
-        <NewsPost cardData={newsPostCard}/>
+        <NewsPost cardData={newsPostCard} />
       </Grid>
     </>
   );
