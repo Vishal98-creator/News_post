@@ -21,16 +21,7 @@ import Divider from "@mui/material/Divider";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: COLORS.white,
-//     },
-//   },
-//   typography: {
-//     fontFamily: "Roboto",
-//   },
-// });
+
 
 const StyledMenu = styled(Menu)(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -55,7 +46,6 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const Header = () => {
-  // const data = ["Shows", "Movies", "Reports", "Keys", "Music", "Subscriptions"];
   const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -102,7 +92,7 @@ const Header = () => {
         sx={{
           flexGrow: 1,
           display: "flex",
-          justifyContent: "center", // Center the navbar horizontally
+          justifyContent: "center", 
           marginBottom: "50px",
         }}
       >
@@ -127,8 +117,7 @@ const Header = () => {
             <Typography
               variant="h6"
               sx={{
-                // display: 'none',
-                // xs: "block", sm: "none", md: "block"
+               
                 display: { xs: "none", sm: "none", md: "block" },
                 color: COLORS.red,
                 width: "10%",
@@ -154,7 +143,7 @@ const Header = () => {
             >
               <Box
                 sx={{
-                  // display: { xs: "none", sm: "flex", md: "none" },
+                 
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -164,12 +153,12 @@ const Header = () => {
               >
                 <Box>
                   <IconButton
-                    // edge="start"
+                    
                     color="inherit"
                     aria-label="menu"
                     onClick={toggleDrawer(true)}
                     sx={{
-                      // display: { xs: "block", sm: "block", md: "none" },
+                     
                       backgroundColor: COLORS.grey,
                       borderRadius: "12px",
                       width: "48px",
@@ -186,14 +175,13 @@ const Header = () => {
                     flexDirection: "row",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    // backgroundColor: 'black',
+                  
                     width: "80%",
                   }}
                 >
                   <Typography
                     variant="h6"
                     sx={{
-                      // display: { xs: "none", sm: "block", md: "none" },
                       color: COLORS.red,
                       fontFamily: "Roboto",
                       fontWeight: 700,
@@ -235,9 +223,7 @@ const Header = () => {
             </Box>
             <Box
               sx={{
-                // display: { xs: "none", sm: "flex" },
                 display: { xs: "none", sm: "none", md: "flex" },
-                // display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 width: "50%",
@@ -280,21 +266,16 @@ const Header = () => {
                 </Box>
               ))}
             </Box>
-            {/* <Box sx={{}}> */}
             <Box
               sx={{
-                // width: "100%",
                 width: { xs: "80%", sm: "50%" },
                 display: { xs: "flex", sm: "none", md: "flex" },
-                // display: "flex",
                 flexDirection: "row",
-                // backgroundColor: "red",
                 justifyContent: { xs: "flex-start", sm: "flex-end" },
               }}
             >
               <CustomSearchInput />
             </Box>
-            {/* </Box> */}
           </Toolbar>
         </AppBar>
       </Box>
