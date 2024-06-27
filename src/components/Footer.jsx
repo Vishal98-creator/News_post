@@ -1,8 +1,11 @@
 import React from "react";
 import { Box, Typography, TextField, Button, Grid } from "@mui/material";
 import { Instagram } from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
+import { COLORS } from "../constants";
 
 const Footer = () => {
+  const classes = useStyles();
   return (
     <Box
       sx={{
@@ -10,18 +13,23 @@ const Footer = () => {
         maxHeight: "483px",
         marginTop: "100px",
         backgroundColor: "rgb(245, 245, 245)",
-        padding: "40px",
+        padding: "60px",
         borderTop: "5px solid #F3E5F5",
+        borderRadius: "0 60px 60px 0",
       }}
     >
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <Typography
-            variant="h6"
-            // sx={{ color: COLORS.red, fontWeight: "bold" }}
-          >
-            Party News
-          </Typography>
+          <div className={classes.reddivstyle}>
+            <div className={classes.reddiv}></div>
+            <Typography
+              variant="h6"
+              sx={{ color: COLORS.lightGray, fontWeight: "bold" }}
+            >
+              Party News
+            </Typography>
+          </div>
+
           <Typography
             variant="body2"
             sx={{ marginTop: "10px", color: "text.secondary" }}
@@ -33,12 +41,19 @@ const Footer = () => {
             Euismod Nisi Porta Lorem Mollis. Morbi Tristique Senectus Et Netus.
             Mattis Pellentesque Id Nibh Tortor Id Aliquet Lectus Proin
           </Typography>
-          <Typography
-            variant="h6"
-            // sx={{ marginTop: "20px", color: COLORS.red, fontWeight: "bold" }}
-          >
-            Newsletters
-          </Typography>
+          <div className={classes.reddivstyle}>
+            <div className={classes.reddiv}></div>
+            <Typography
+              variant="h6"
+              sx={{
+                marginTop: "20px",
+                color: COLORS.lightGray,
+                fontWeight: "bold",
+              }}
+            >
+              Newsletters
+            </Typography>
+          </div>
           <Box
             sx={{ display: "flex", alignItems: "center", marginTop: "10px" }}
           >
@@ -48,37 +63,50 @@ const Footer = () => {
               placeholder="Напишете Имеил Си"
               sx={{ flexGrow: 1 }}
             />
-            <Button variant="contained" sx={{ marginLeft: "10px" }}>
+            {/* <Button variant="contained" sx={{ marginLeft: "10px" }}>
               Subscribe
-            </Button>
+            </Button> */}
           </Box>
         </Grid>
         <Grid item xs={12} md={3}>
-          <Typography
-            variant="h6"
-            // sx={{ color: COLORS.red, fontWeight: "bold" }}
-          >
-            Категории
-          </Typography>
+          <div className={classes.reddivstyle}>
+            <div className={classes.reddiv}></div>
+            <Typography
+              variant="h6"
+              sx={{ color: COLORS.lightGray, fontWeight: "bold" }}
+            >
+              Категории
+            </Typography>
+          </div>
           <Typography
             variant="body2"
             sx={{ marginTop: "10px", color: "text.secondary" }}
           >
             Предавания <br />
+            <br />
             Филми <br />
+            <br />
             Репортажи <br />
+            <br />
             Клюки <br />
+            <br />
             Музика <br />
+            <br />
             Абонаменти
+            <br />
+            <br />
           </Typography>
         </Grid>
         <Grid item xs={12} md={3}>
-          <Typography
-            variant="h6"
-            // sx={{ color: COLORS.red, fontWeight: "bold" }}
-          >
-            Social Network
-          </Typography>
+          <div className={classes.reddivstyle}>
+            <div className={classes.reddiv}></div>
+            <Typography
+              variant="h6"
+              sx={{ color: COLORS.lightGray, fontWeight: "bold" }}
+            >
+              Social Network
+            </Typography>
+          </div>
           <Button
             variant="contained"
             startIcon={<Instagram />}
@@ -102,7 +130,8 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Privacy Policy | Terms & Conditions
+          <a href="https://www.w3schools.com">Privacy Policy</a> |{" "}
+          <a href="https://www.w3schools.com">Terms & Conditions </a>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           All Copyright (c) 2024 Reserved
@@ -113,3 +142,18 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const useStyles = makeStyles((theme) => ({
+  reddiv: {
+    backgroundColor: COLORS.red,
+    width: "5px",
+    height: "11px",
+    borderRadius: "20px",
+  },
+  reddivstyle: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
+  },
+}));
