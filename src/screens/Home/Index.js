@@ -16,6 +16,8 @@ import Popularposts from "./Popularposts";
 import SportWidget from "./SportWidget";
 import { Grid } from "@mui/material";
 import NewsPost from "./NewsPost";
+import CategorySlider from "../../components/CategorySlider";
+import { TOP_CATEGORIES } from "../../constants";
 import LatestVideos from "./LatestVideos";
 
 const TopViewCardData = [
@@ -32,16 +34,6 @@ const TopViewCardData = [
 ];
 
 const PopularPostCardData = [
-  {
-    bgImg: sportImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: laptopImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
   {
     bgImg: pinkbgCar,
     title: "Заглавие на новина",
@@ -110,7 +102,8 @@ const newsPostCard = [
 const Index = () => {
   return (
     <>
-      <Grid display={"flex"} flexDirection={"column"} >
+      <Grid display={"flex"} flexDirection={"column"}>
+        <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
         <TopView cardData={TopViewCardData} />
         <Popularposts cardData={PopularPostCardData} />
         <SportWidget />

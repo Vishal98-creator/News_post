@@ -3,7 +3,6 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import blackbgcar from "../assets/images/blackbg-car.png";
 import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 
@@ -19,7 +18,9 @@ export default function Card1({ cardData }) {
       />
       <CardContent className={classes.cardcontent}>
         <Typography variant="h5">{cardData.title}</Typography>
-        <Typography variant="body2" sx={{mt:1, color:COLORS.lightGray}}>{cardData.description}</Typography>
+        <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
+          {cardData.description}
+        </Typography>
       </CardContent>
     </Card>
   );
@@ -27,11 +28,11 @@ export default function Card1({ cardData }) {
 
 const useStyles = makeStyles((theme) => ({
   cardcontainer: {
-    maxWidth: '100%',
+    maxWidth: "100%",
     height: "452px",
     position: "relative",
     borderRadius: "12px",
-    width:'100%'
+    width: "100%",
   },
   cardcontent: {
     position: "absolute",

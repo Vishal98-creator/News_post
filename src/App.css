@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
 }
@@ -11,7 +11,6 @@
 ::selection {
   background: #676766;
 }
-
 
 .example::-webkit-scrollbar {
   display: none;
@@ -49,8 +48,8 @@ body {
   letter-spacing: -0.015em;
   max-width: 1550px;
   margin: auto;
+  padding: 30px;
 }
-
 
 hr {
   -webkit-box-sizing: content-box;
@@ -77,6 +76,6 @@ p {
 .slick-slide {
   margin-right: 20px !important;
 }
-.c-small-card-react-slick div{
+.c-small-card-react-slick div {
   margin-top: 10px !important;
 }

@@ -15,7 +15,7 @@ const TopView = (props) => {
         display={"flex"}
         justifyContent={"center"}
       >
-        <Card1 cardData={cardData[0]}/>
+        <Card1 cardData={cardData[0]} />
       </Grid>
       <Grid
         item
@@ -25,7 +25,7 @@ const TopView = (props) => {
         display={"flex"}
         justifyContent={"center"}
       >
-        <Card1 cardData={cardData[1]}/>
+        <Card1 cardData={cardData[1]} />
       </Grid>
       <Grid
         item
@@ -36,7 +36,7 @@ const TopView = (props) => {
         justifyContent={"center"}
       >
         {/* <Card1 cardData={cardData[0]}/> */}
-        <CardSlider/>  
+        <CardSlider />
       </Grid>
     </Grid>
   );
