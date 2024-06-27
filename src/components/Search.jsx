@@ -15,12 +15,12 @@ const SearchBox = styled(Box)(({ theme }) => ({
   alignItems: "center",
   backgroundColor: COLORS.grey,
   borderRadius: "13px",
-  width: '100%',
-  // width: "399px",
+  // width: '100%',
+  width: "399px",
   height: "48px",
-  "&:hover": {
-    backgroundColor: COLORS.white,
-  },
+  // "&:hover": {
+  //   backgroundColor: COLORS.white,
+  // },
 }));
 const StyledMenu = styled(Menu)(({ theme }) => ({
   '& .MuiPaper-root': {
@@ -103,7 +103,7 @@ export default function CustomSearchInput() {
           color: "#777",
           borderRadius: "13px",
           // backgroundColor: 'red',
-          height: "50px",
+          height: "48px",
         }}
       >
         <MoreVertIcon />

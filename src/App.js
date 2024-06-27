@@ -1,13 +1,17 @@
 import "./App.css";
 import Header from "./components/Header";
-import Home from "./screens/Home";
+import Home from "./screens/Home/Index";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./theme";
 
 function App() {
   return (
-    <div className="">
+    <ThemeProvider theme={theme}>
+      <div className="" style={{marginBottom:'300px'}}>
         <Header />
         <Home />
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }
 

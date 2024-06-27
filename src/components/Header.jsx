@@ -21,16 +21,16 @@ import Divider from "@mui/material/Divider";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: COLORS.white,
-    },
-  },
-  typography: {
-    fontFamily: "Roboto",
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: COLORS.white,
+//     },
+//   },
+//   typography: {
+//     fontFamily: "Roboto",
+//   },
+// });
 
 const StyledMenu = styled(Menu)(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -55,7 +55,9 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const Header = () => {
-  const data = ["Shows", "Movies", "Reports", "Keys", "Music", "Subscriptions"];
+  // const data = ["Shows", "Movies", "Reports", "Keys", "Music", "Subscriptions"];
+  const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenuClick = (event) => {
@@ -94,15 +96,17 @@ const Header = () => {
     </Box>
   );
   return (
-    <ThemeProvider theme={theme}>
+  
+    <>
       <Box
         sx={{
           flexGrow: 1,
           display: "flex",
           justifyContent: "center", // Center the navbar horizontally
+          marginBottom: "50px",
         }}
       >
-        <AppBar position="static">
+        <AppBar position="static" sx={{boxShadow:'none', pt:3}}>
           <Toolbar>
             <IconButton
               // edge="start"
@@ -145,7 +149,7 @@ const Header = () => {
                 alignItems: "center",
                 height: "105px",
                 marginBottom: "5px",
-                marginTop: '5px'
+                marginTop: "5px",
               }}
             >
               <Box
@@ -200,13 +204,7 @@ const Header = () => {
                     MEGA.news
                   </Typography>
                 </Box>
-                <Box
-                  sx={
-                    {
-                      // display: { xs: "none", sm: "block", md: "none" },
-                    }
-                  }
-                >
+               
                   <IconButton
                     edge="end"
                     color="inherit"
@@ -220,11 +218,17 @@ const Header = () => {
                   >
                     <BookmarkBorderOutlinedIcon />
                   </IconButton>
-                </Box>
+                
               </Box>
               <Box
-            sx={{width: '102%',display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',marginLeft: '9px'}}
-          
+                sx={{
+                  width: "102%",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  marginLeft: "9px",
+                }}
               >
                 <CustomSearchInput />
               </Box>
@@ -236,7 +240,7 @@ const Header = () => {
                 // display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                width: "40%",
+                width: "50%",
               }}
             >
               {data.map((menu) => (
@@ -253,6 +257,7 @@ const Header = () => {
                       lineHeight: "18.75px",
                       textAlign: "left",
                       color: COLORS.black,
+                      backgroundColor: COLORS.white 
                     }}
                   >
                     {menu}
@@ -296,7 +301,7 @@ const Header = () => {
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
-    </ThemeProvider>
+      </>
   );
 };
 
