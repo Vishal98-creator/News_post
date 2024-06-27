@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TopView from "./TopView";
 import blackbgcar from "../../assets/images/blackbg-car.png";
 import musicGirl from "../../assets/images/musicGirl.png";
@@ -18,6 +18,7 @@ import { Grid } from "@mui/material";
 import NewsPost from "./NewsPost";
 import CategorySlider from "../../components/CategorySlider";
 import { TOP_CATEGORIES } from "../../constants";
+import LatestVideos from "./LatestVideos";
 
 const TopViewCardData = [
   {
@@ -44,7 +45,7 @@ const PopularPostCardData = [
     description: "Началото на статията....",
   },
   {
-    bgImg: musicGirl,
+    bgImg: sportImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
   },
@@ -54,22 +55,12 @@ const PopularPostCardData = [
     description: "Началото на статията....",
   },
   {
-    bgImg: blackbgcar,
+    bgImg: pinkbgCar,
     title: "Заглавие на новина",
     description: "Началото на статията....",
   },
   {
-    bgImg: rabitImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: mobileImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: sportImg,
+    bgImg: foodImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
   },
@@ -109,15 +100,18 @@ const newsPostCard = [
 ];
 
 const Index = () => {
-  const [cardData, setCardData] = useState(TopViewCardData);
   return (
     <>
-      <Grid display={"flex"} flexDirection={"column"} spacing={5}>
+      <Grid display={"flex"} flexDirection={"column"}>
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
-        <TopView cardData={cardData} />
+        <TopView cardData={TopViewCardData} />
         <Popularposts cardData={PopularPostCardData} />
         <SportWidget />
         <NewsPost cardData={newsPostCard} />
+        <LatestVideos cardData={newsPostCard} />
+        <Popularposts cardData={PopularPostCardData} />
+        <LatestVideos cardData={newsPostCard} />
+        <Popularposts cardData={PopularPostCardData} />
       </Grid>
     </>
   );
