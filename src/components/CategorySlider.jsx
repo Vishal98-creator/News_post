@@ -3,7 +3,7 @@ import React from "react";
 const CategorySlider = () => {
   return (
     <>
-      <div>CategorySlider</div>
+      <div></div>
     </>
   );
 };
