@@ -15,8 +15,8 @@ const SearchBox = styled(Box)(({ theme }) => ({
   alignItems: "center",
   backgroundColor: COLORS.grey,
   borderRadius: "13px",
-  // width: '100%',
-  width: "399px",
+  width: '100%',
+  // width: "399px",
   height: "48px",
   // "&:hover": {
   //   backgroundColor: COLORS.white,
