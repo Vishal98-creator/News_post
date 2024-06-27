@@ -93,10 +93,11 @@ const Header = () => {
           flexGrow: 1,
           display: "flex",
           justifyContent: "center", 
-          marginBottom: "50px",
+          marginBottom: "20px",
+         
         }}
       >
-        <AppBar position="static" sx={{boxShadow:'none', pt:3}}>
+        <AppBar position="static" sx={{boxShadow:'none'}}>
           <Toolbar>
             <IconButton
               // edge="start"
@@ -266,9 +267,15 @@ const Header = () => {
                 </Box>
               ))}
             </Box>
+            <Box sx={{ display: { xs: "none", sm: "none", md: "flex" },
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "20%",}}>
+
+            </Box>
             <Box
               sx={{
-                width: { xs: "80%", sm: "50%" },
+                width: { xs: "80%", sm: "30%" },
                 display: { xs: "flex", sm: "none", md: "flex" },
                 flexDirection: "row",
                 justifyContent: { xs: "flex-start", sm: "flex-end" },
