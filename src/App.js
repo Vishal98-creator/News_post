@@ -7,7 +7,7 @@ import theme from "./theme";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="">
+      <div className="" style={{marginBottom:'300px'}}>
         <Header />
         <Home />
       </div>
