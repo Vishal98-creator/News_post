@@ -74,3 +74,9 @@ p {
   margin-bottom: 1rem;
 }
 
+.slick-slide {
+  margin-right: 20px !important;
+}
+.c-small-card-react-slick div{
+  margin-top: 10px !important;
+}

@@ -27,25 +27,23 @@ export default function ImageSlider() {
     );
   };
 
-  console.log("Current Slide Index:", currentSlide);
 
   return (
     <div className={classes.sliderContainer}>
-      {cardDataArray.map((cardData, index) => (
-        <div
-          key={index}
-          className={`${classes.slide} ${
-            index === currentSlide ? classes.slideActive : ""
-          }`}
-        >
-          <Card1 cardData={cardData} />
-        </div>
-      ))}
+      <div className={`${classes.slide}`}>
+        <Card1 cardData={cardDataArray[currentSlide]} />
+      </div>
       <div className={classes.buttons}>
-        <Button onClick={prevSlide} sx={{width:'40px', height:'40px', marginLeft:'10px'}}>
+        <Button
+          onClick={prevSlide}
+          sx={{ width: "40px", height: "40px", marginLeft: "10px" }}
+        >
           <NavigateBefore />
         </Button>
-        <Button onClick={nextSlide} sx={{width:'40px', height:'40px', marginRight:'10px'}}>
+        <Button
+          onClick={nextSlide}
+          sx={{ width: "40px", height: "40px", marginRight: "10px" }}
+        >
           <NavigateNext />
         </Button>
       </div>
@@ -62,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     height: "452px", // Adjust height as needed
   },
   slide: {
-    opacity: 0,
+    opacity: 1,
     transition: "opacity 0.5s ease-in-out",
     width: "100%",
     height: "100%", // Adjust height as needed
