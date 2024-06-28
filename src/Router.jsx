@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "admin/add-post",
+    path: "/admin/add-post",
     element: <AddPost />,
   },
 ]);
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
 const Router = () => {
   return (
     <div className="" style={{ marginBottom: "300px" }}>
-      <Header />
+      {/* <Header /> */}
       <RouterProvider router={router} />
       <Footer />
     </div>
