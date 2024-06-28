@@ -11,13 +11,17 @@ const Popularposts = ({ cardData }) => {
   return (
     <>
       <Box sx={{ mt: 5 }}>
-        <Box display={'flex'} justifyContent={'space-between'}>
+        <Box display={"flex"} justifyContent={"space-between"}>
           <Box varient="h4" className={classes.sectionTitle}>
             Популярни
           </Box>
           <Box>
-            <Button><NavigateBefore/></Button>
-            <Button sx={{marginLeft:2}}><NavigateNext/></Button>
+            <Button>
+              <NavigateBefore />
+            </Button>
+            <Button sx={{ marginLeft: 2 }}>
+              <NavigateNext />
+            </Button>
           </Box>
         </Box>
         <Grid container spacing={2}>

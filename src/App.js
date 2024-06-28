@@ -4,15 +4,12 @@ import Home from "./screens/Home/Index";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import Footer from "./components/Footer";
+import Router from "./Router";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="" style={{ marginBottom: "300px" }}>
-        <Header />
-        <Home />
-        <Footer />
-      </div>
+      <Router />
     </ThemeProvider>
   );
 }
