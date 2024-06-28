@@ -17,7 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import {useNavigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 
 const StyledPopover = styled(Popover)(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -42,7 +42,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const Header = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -128,7 +128,7 @@ const Header = () => {
                 cursor: 'pointer',
 
               }}
-              onClick={()=> navigate("/admin/add-post")}
+              // onClick={()=> navigate("admin/add-post")}
             >
               PartyNews
             </Typography>
