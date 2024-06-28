@@ -10,7 +10,6 @@ const Footer = () => {
     <Box
       sx={{
         maxWidth: "60%",
-        maxHeight: "483px",
         marginTop: "100px",
         backgroundColor: "rgb(245, 245, 245)",
         padding: "60px",
