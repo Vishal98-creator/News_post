@@ -1,13 +1,17 @@
 import React, { useRef } from "react";
 import Slider from "react-slick";
+import { makeStyles } from "@mui/styles";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card2 from "../../components/Card2";
 import { Box, Button } from "@mui/material";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
+import { COLORS } from "../../constants";
 
 function Responsive({ cardData }) {
   const sliderRef = useRef(null);
+  const classes = useStyles();
+
   var settings = {
     // dots: true,
     infinite: true,
@@ -23,7 +27,7 @@ function Responsive({ cardData }) {
           slidesToScroll: 3,
           initialSlide: 1,
           infinite: true,
-          dots: true,
+          // dots: true,
         },
       },
       {
@@ -44,9 +48,11 @@ function Responsive({ cardData }) {
     ],
   };
   return (
-    <Box sx={{ mt: 8 }}>
+    <Box sx={{ mt: 8, minHeight: "100%" }}>
       <Box display={"flex"} justifyContent={"space-between"}>
-        <Box varient="h4">Популярни_LatestVideos</Box>
+        <Box varient="h4" className={classes.sectionTitle}>
+          Популярни
+        </Box>
         <Box>
           <Button onClick={() => sliderRef.current.slickPrev()}>
             <NavigateBefore />
@@ -75,3 +81,14 @@ function Responsive({ cardData }) {
 }
 
 export default Responsive;
+
+const useStyles = makeStyles((theme) => ({
+  sectionTitle: {
+    borderLeft: `5px solid ${COLORS.red}`,
+    lineHeight: "normal",
+    paddingLeft: "10px",
+    fontWeight: 500,
+    fontSize: "20px",
+    marginBottom: "21px",
+  },
+}));

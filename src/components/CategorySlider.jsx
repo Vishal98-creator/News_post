@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, Typography, CardMedia, Card } from "@mui/material";
+import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 
 const CategorySlider = ({ TOP_CATEGORIES }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,14 +23,19 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
         position: "relative",
         height: "68px",
         display: "flex",
+        paddingLeft: "20px",
         alignItems: "center",
         overflow: "hidden",
+        marginBottom: "25px",
         // padding: "0 10px",
       }}
     >
       <Box
         sx={{
-          backgroundColor: "rgb(245, 245, 245)",
+          padding: "16px",
+
+          borderRadius: "30px",
+          backgroundColor: "#F5F5F5",
           display: "flex",
           transition: "margin 0.3s ease-in-out",
           marginLeft: `-${currentIndex * 45}px`,
@@ -43,25 +49,19 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
           disabled={currentIndex === 0}
           sx={{
             position: "absolute",
+            borderRadius: "10px",
+            backgroundColor: "#F5F5F5",
+            top: "0px",
             left: "0px",
+            bottom: "10px",
             zIndex: 1,
-            height: "48px",
-            minWidth: "90px",
-            fontSize: "1.5rem",
-            background:
-              "linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 5))",
-            transition: "background-color 0.3s ease", // Smooth transition for hover effect
-            "&:hover": {
-              background:
-                "linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1.5))",
-              // Adjust the gradient colors and opacity as needed
-              boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)", // Adding a subtle box shadow for shading
-            },
-
+            height: "70px",
+            width: "60px",
             display: currentIndex === 0 ? "none" : "inline-flex",
+            // boxShadow: "10px 0px 6px rgba(247, 244, 244, 4)",
           }}
         >
-          {"<"}
+          <NavigateBefore />
         </Button>
         {TOP_CATEGORIES.map((category, index) => (
           <Box
@@ -86,10 +86,11 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
                 image={category.image}
                 alt="topTags"
                 sx={{
-                  filter: "blur(2px)", // Apply blur effect to the image
+                  // filter: "blur(2.5px)", // Apply blur effect to the image
+                  filter: "blur(2px) brightness(85%)",
+                  // filter: "brightness(70%)", // Apply brightness filter to fade the image
                   objectFit: "cover", // Ensure the image covers the entire CardMedia container
                   objectPosition: "center top", // Position the image within the CardMedia container
-                  filter: "brightness(70%)", // Apply brightness filter to fade the image
                 }}
               />
               <Typography
@@ -108,25 +109,6 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
                 {category.name}
               </Typography>
             </Card>
-
-            {/* <Typography
-              variant="subtitle1"
-              sx={{
-                color: "#fff",
-                textAlign: "center",
-                background: "rgba(0, 0, 0, 0.5)",
-                borderRadius: "12px",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "8px",
-                boxSizing: "border-box",
-              }}
-            >
-              {category.name}
-            </Typography> */}
           </Box>
         ))}
       </Box>
@@ -134,27 +116,21 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
         onClick={handleNext}
         disabled={currentIndex === TOP_CATEGORIES.length - 1}
         sx={{
-          color: "rgb(62, 50, 50)",
+          // color: "rgb(62, 50, 50)",
+          borderRadius: "10px",
           position: "absolute",
-          right: "0px",
+          backgroundColor: "#F5F5F5",
+          right: 0,
           zIndex: 1,
-          height: "48px",
-          minWidth: "90px",
-          fontSize: "1.5rem",
-          background:
-            "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 5))",
-          transition: "background-color 0.3s ease", // Smooth transition for hover effect
-          "&:hover": {
-            background:
-              "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1.5))",
-            // Increase the opacity towards the right
-            boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)", // Adding a subtle box shadow for shading
-          },
+          height: "70px",
+          width: "60px",
           display:
-            currentIndex >= TOP_CATEGORIES.length - 1 ? "none" : "inline-flex",
+            currentIndex >= TOP_CATEGORIES.length - 1
+              ? "noinline-flexne"
+              : "inline-flex",
         }}
       >
-        {">"}
+        <NavigateNext />
       </Button>
     </Box>
   );
