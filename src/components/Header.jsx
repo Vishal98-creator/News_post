@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import Popover from "@mui/material/Popover";
 import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { COLORS } from "../constants";
 import CustomSearchInput from "./Search";
 import IconButton from "@mui/material/IconButton";
@@ -18,23 +15,22 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+// import {useNavigate} from 'react-router-dom';
 
-
-
-const StyledMenu = styled(Menu)(({ theme }) => ({
+const StyledPopover = styled(Popover)(({ theme }) => ({
   "& .MuiPaper-root": {
     backgroundColor: COLORS.white,
     borderRadius: theme.shape.borderRadius,
     boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
     minWidth: 100,
     color: COLORS.black,
+    
   },
 }));
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
-  fontFamily: "Roboto",
   fontSize: "16px",
   fontWeight: 500,
   lineHeight: "18.75px",
@@ -46,23 +42,29 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const Header = () => {
+  // const navigate = useNavigate();
   const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [currentMenu, setCurrentMenu] = useState(null);
+  const [hoveredMenu, setHoveredMenu] = useState(null);
 
-  const handleMenuClick = (event) => {
+  const handlePopoverOpen = (event, menu) => {
     setAnchorEl(event.currentTarget);
+    setCurrentMenu(menu);
+    setHoveredMenu(menu);
   };
 
-  const handleMenuClose = () => {
+  const handlePopoverClose = () => {
+    console.log("This is cloesed ======>>>");
     setAnchorEl(null);
+    setCurrentMenu(null);
+    setHoveredMenu(null);
   };
+
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
     }
     setDrawerOpen(open);
@@ -85,22 +87,20 @@ const Header = () => {
       <Divider />
     </Box>
   );
+
   return (
-  
     <>
       <Box
         sx={{
           flexGrow: 1,
           display: "flex",
-          justifyContent: "center", 
+          justifyContent: "center",
           marginBottom: "20px",
-         
         }}
       >
-        <AppBar position="static" sx={{boxShadow:'none'}}>
+        <AppBar position="static" sx={{ boxShadow: "none" }}>
           <Toolbar>
             <IconButton
-              // edge="start"
               color="inherit"
               aria-label="menu"
               onClick={toggleDrawer(true)}
@@ -118,15 +118,17 @@ const Header = () => {
             <Typography
               variant="h6"
               sx={{
-               
                 display: { xs: "none", sm: "none", md: "block" },
                 color: COLORS.red,
                 width: "10%",
                 fontFamily: "Roboto",
                 fontWeight: 700,
-                fontSize: "22px",
+                fontSize: "26px",
                 lineHeight: "25.78px",
+                cursor: 'pointer',
+
               }}
+              // onClick={()=> navigate("admin/add-post")}
             >
               PartyNews
             </Typography>
@@ -144,7 +146,6 @@ const Header = () => {
             >
               <Box
                 sx={{
-                 
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -154,12 +155,10 @@ const Header = () => {
               >
                 <Box>
                   <IconButton
-                    
                     color="inherit"
                     aria-label="menu"
                     onClick={toggleDrawer(true)}
                     sx={{
-                     
                       backgroundColor: COLORS.grey,
                       borderRadius: "12px",
                       width: "48px",
@@ -176,7 +175,6 @@ const Header = () => {
                     flexDirection: "row",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                  
                     width: "80%",
                   }}
                 >
@@ -184,7 +182,6 @@ const Header = () => {
                     variant="h6"
                     sx={{
                       color: COLORS.red,
-                      fontFamily: "Roboto",
                       fontWeight: 700,
                       fontSize: "22px",
                       lineHeight: "25.78px",
@@ -193,21 +190,20 @@ const Header = () => {
                     MEGA.news
                   </Typography>
                 </Box>
-               
-                  <IconButton
-                    edge="end"
-                    color="inherit"
-                    aria-label="bookmark"
-                    sx={{
-                      backgroundColor: COLORS.grey,
-                      borderRadius: "12px",
-                      width: "48px",
-                      height: "48px",
-                    }}
-                  >
-                    <BookmarkBorderOutlinedIcon />
-                  </IconButton>
-                
+
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="bookmark"
+                  sx={{
+                    backgroundColor: COLORS.grey,
+                    borderRadius: "12px",
+                    width: "48px",
+                    height: "48px",
+                  }}
+                >
+                  <BookmarkBorderOutlinedIcon />
+                </IconButton>
               </Box>
               <Box
                 sx={{
@@ -227,52 +223,57 @@ const Header = () => {
                 display: { xs: "none", sm: "none", md: "flex" },
                 alignItems: "center",
                 justifyContent: "space-between",
-                width: "50%",
+                width: "40%",
+                marginLeft: "15px",
               }}
             >
               {data.map((menu) => (
-                <Box key={menu}>
-                  <Button
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleMenuClick}
-                    color="inherit"
-                    sx={{
-                      fontFamily: "Roboto",
-                      fontSize: "16px",
-                      fontWeight: 500,
-                      lineHeight: "18.75px",
-                      textAlign: "left",
-                      color: COLORS.black,
-                      backgroundColor: COLORS.white 
+                <Box
+                  key={menu}
+                  onMouseEnter={(event) => handlePopoverOpen(event, menu)}
+                  onMouseLeave={handlePopoverClose}
+                  sx={{
+                    fontSize: "16px",
+                    fontWeight: 500,
+                    lineHeight: "18.75px",
+                    textAlign: "left",
+                    color: COLORS.black,
+                    backgroundColor: hoveredMenu === menu ? 'rgba(220, 220, 220, 1)' : COLORS.white,
+                    display: "flex",
+                    alignItems: "center",
+                    borderRadius: '7px',
+                    width: '15  %',
+                    paddingLeft: '5px',
+                    paddingRight: '5px',
+                    height: '30px'
+                  }}
+                >
+                  {menu}
+                  <KeyboardArrowDownIcon sx={{color: COLORS.lightGrayLighter}}/> 
+                  <StyledPopover
+                    id="simple-popover"
+                    anchorEl={currentMenu === menu ? anchorEl : null}
+                    open={currentMenu === menu}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
                     }}
                   >
-                    {menu}
-                    <KeyboardArrowDownIcon />
-                  </Button>
-                  <StyledMenu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                  >
-                    <StyledMenuItem onClick={handleMenuClose}>
-                      Option 1
-                    </StyledMenuItem>
-                    <StyledMenuItem onClick={handleMenuClose}>
-                      Option 2
-                    </StyledMenuItem>
-                  </StyledMenu>
+                    <StyledMenuItem onClick={handlePopoverClose}>Option 1</StyledMenuItem>
+                    <StyledMenuItem onClick={handlePopoverClose}>Option 2</StyledMenuItem>
+                  </StyledPopover>
                 </Box>
               ))}
             </Box>
-            <Box sx={{ display: { xs: "none", sm: "none", md: "flex" },
+            <Box
+              sx={{
+                display: { xs: "none", sm: "none", md: "flex" },
                 alignItems: "center",
                 justifyContent: "space-between",
-                width: "20%",}}>
-
-            </Box>
+                width: "15%",
+              }}
+            ></Box>
             <Box
               sx={{
                 width: { xs: "80%", sm: "30%" },
@@ -289,7 +290,7 @@ const Header = () => {
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
-      </>
+    </>
   );
 };
 

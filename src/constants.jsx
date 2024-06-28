@@ -9,9 +9,11 @@ import TopTags8 from "./assets/images/CategorySlider/TopTags8.png";
 export const COLORS = {
   white: "#fff",
   black: "rgba(0, 0, 0, 1)",
-  red: "rgba(248, 21, 57, 1)",
-  lightGray: "rgba(62, 50, 50, 0.75)",
-  grey: "#F5F5F5",
+  red:'rgba(248, 21, 57, 1)',
+  lightGray:'rgba(62, 50, 50, 0.75)',
+  grey: '#F5F5F5',
+  lightGrayLighter: 'rgba(125, 100, 100, 0.75)'
+
 };
 
 export const TOP_CATEGORIES = [
