@@ -1,87 +1,77 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Card2 from "../../components/Card2";
-import { makeStyles } from "@mui/styles";
-import { COLORS } from "../../constants";
+import { Box, Button } from "@mui/material";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
-const useStyles = makeStyles((theme) => ({
-  sectionTitle: {
-    borderLeft: `5px solid ${COLORS.red}`,
-    lineHeight: "normal",
-    paddingLeft: "10px",
-    fontWeight: 500,
-    fontSize: "20px",
-  },
-}));
-
-const Popularposts = ({ cardData }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const classes = useStyles();
-  const isSmallScreen = useMediaQuery("(max-width:600px)");
-  const isMediumScreen = useMediaQuery("(max-width:960px)");
-
-  const visibleCards = isSmallScreen ? 1 : isMediumScreen ? 2 : 4; // Adjust the number of visible cards based on screen size
-  const cardWidth = 100 / visibleCards; // Each card's width in percentage of the container
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + visibleCards < cardData.length ? prevIndex + 1 : prevIndex
-    );
+function Responsive({ cardData }) {
+  const sliderRef = useRef(null);
+  var settings = {
+    // dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 2,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          initialSlide: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
-  };
-
   return (
-    <Box sx={{ mt: 5 }}>
+    <Box sx={{ mt: 8 }}>
       <Box display={"flex"} justifyContent={"space-between"}>
-        <Typography variant="h4" className={classes.sectionTitle}>
-          Популярни
-        </Typography>
+        <Box varient="h4">Популярни_LatestVideos</Box>
         <Box>
-          <Button onClick={handlePrev}>
+          <Button onClick={() => sliderRef.current.slickPrev()}>
             <NavigateBefore />
           </Button>
-          <Button onClick={handleNext} sx={{ marginLeft: 2 }}>
+          <Button
+            onClick={() => sliderRef.current.slickNext()}
+            sx={{ marginLeft: 2 }}
+          >
             <NavigateNext />
           </Button>
         </Box>
       </Box>
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          overflow: "hidden",
-          mt: 2,
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            transition: "transform 0.3s ease-in-out",
-            transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`,
-          }}
-        >
-          {cardData.map((card, i) => (
-            <Box
-              key={i}
-              sx={{
-                flex: `0 0 ${cardWidth}%`,
-                maxWidth: `${cardWidth}%`,
-                boxSizing: "border-box",
-                padding: "10px",
-              }}
-            >
-              <Card2 cardData={card} />
-            </Box>
-          ))}
-        </Box>
-      </Box>
+      <div className="slider-container" style={{ height: "500px" }}>
+        <Slider ref={sliderRef} {...settings}>
+          {cardData.map((card, index) => {
+            return (
+              <div key={index}>
+                <Card2 cardData={card} />
+              </div>
+            );
+          })}
+        </Slider>
+      </div>
     </Box>
   );
-};
+}
 
-export default Popularposts;
+export default Responsive;

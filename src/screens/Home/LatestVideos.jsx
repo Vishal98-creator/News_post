@@ -10,7 +10,7 @@ import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { COLORS } from "../../constants";
 
 function LatestVideos({ cardData }) {
-    const sliderRef = useRef(null);
+  const sliderRef = useRef(null);
   const classes = useStyles();
   const settings = {
     className: "slider variable-width",
@@ -30,7 +30,10 @@ function LatestVideos({ cardData }) {
           <Button onClick={() => sliderRef.current.slickPrev()}>
             <NavigateBefore />
           </Button>
-          <Button onClick={() => sliderRef.current.slickNext()} sx={{ marginLeft: 2 }}>
+          <Button
+            onClick={() => sliderRef.current.slickNext()}
+            sx={{ marginLeft: 2 }}
+          >
             <NavigateNext />
           </Button>
         </Box>

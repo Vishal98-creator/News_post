@@ -14,8 +14,8 @@ const SportWidget = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height:'464px',
-          mt:5
+          height: "464px",
+          mt: 5,
         }}
       >
         preview на последния филм - YouTube
