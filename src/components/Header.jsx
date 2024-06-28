@@ -17,7 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-// import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const StyledPopover = styled(Popover)(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -26,7 +26,6 @@ const StyledPopover = styled(Popover)(({ theme }) => ({
     boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
     minWidth: 100,
     color: COLORS.black,
-    
   },
 }));
 
@@ -42,7 +41,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const Header = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -64,7 +63,10 @@ const Header = () => {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = (open) => (event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setDrawerOpen(open);
@@ -125,10 +127,9 @@ const Header = () => {
                 fontWeight: 700,
                 fontSize: "26px",
                 lineHeight: "25.78px",
-                cursor: 'pointer',
-
+                cursor: "pointer",
               }}
-              // onClick={()=> navigate("admin/add-post")}
+              onClick={()=> navigate("/admin/add-post")}
             >
               PartyNews
             </Typography>
@@ -238,30 +239,39 @@ const Header = () => {
                     lineHeight: "18.75px",
                     textAlign: "left",
                     color: COLORS.black,
-                    backgroundColor: hoveredMenu === menu ? 'rgba(220, 220, 220, 1)' : COLORS.white,
+                    backgroundColor:
+                      hoveredMenu === menu
+                        ? "rgba(220, 220, 220, 1)"
+                        : COLORS.white,
                     display: "flex",
                     alignItems: "center",
-                    borderRadius: '7px',
-                    width: '15  %',
-                    paddingLeft: '5px',
-                    paddingRight: '5px',
-                    height: '30px'
+                    borderRadius: "7px",
+                    width: "15  %",
+                    paddingLeft: "5px",
+                    paddingRight: "5px",
+                    height: "30px",
                   }}
                 >
                   {menu}
-                  <KeyboardArrowDownIcon sx={{color: COLORS.lightGrayLighter}}/> 
+                  <KeyboardArrowDownIcon
+                    sx={{ color: COLORS.lightGrayLighter }}
+                  />
                   <StyledPopover
                     id="simple-popover"
                     anchorEl={currentMenu === menu ? anchorEl : null}
                     open={currentMenu === menu}
                     onClose={handlePopoverClose}
                     anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
+                      vertical: "bottom",
+                      horizontal: "left",
                     }}
                   >
-                    <StyledMenuItem onClick={handlePopoverClose}>Option 1</StyledMenuItem>
-                    <StyledMenuItem onClick={handlePopoverClose}>Option 2</StyledMenuItem>
+                    <StyledMenuItem onClick={handlePopoverClose}>
+                      Option 1
+                    </StyledMenuItem>
+                    <StyledMenuItem onClick={handlePopoverClose}>
+                      Option 2
+                    </StyledMenuItem>
                   </StyledPopover>
                 </Box>
               ))}

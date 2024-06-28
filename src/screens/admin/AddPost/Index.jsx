@@ -5,6 +5,7 @@ import SendButtons from "./SendButtons";
 import { imageUploadOnServer } from "../../../utils/helperFunctios";
 import { apiCall } from "../../../utils/httpClient";
 import apiEndPoints from "../../../utils/apiEndPoints";
+import Header from "../../../components/Header";
 
 const AddPost = () => {
   const [file, setFile] = useState(null);
@@ -20,8 +21,7 @@ const AddPost = () => {
   };
 
   const handlePublic = async () => {
-    
-console.log(': call', );
+    console.log(": call");
     if (title && value && postType) {
       const formData = new FormData();
       // formData.append("files", title);
@@ -31,24 +31,20 @@ console.log(': call', );
       formData.append("mainImage", file);
       // formData.append("tags", []);
       try {
-        const response = await apiCall(
-          "POST",
-          apiEndPoints.ADDPOST,
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        );
-        window.alert('Post Public')
+        const response = await apiCall("POST", apiEndPoints.ADDPOST, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        window.alert("Post Public");
       } catch (error) {
         console.error("Error IN POST:", error);
       }
-    }else{
-      console.log('Enter required Fields');
+    } else {
+      console.log("Enter required Fields");
     }
   };
   return (
     <>
+      <Header />
       <ProfileHeader />
       <SendButtons />
       <AddPostForm

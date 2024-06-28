@@ -19,6 +19,7 @@ import NewsPost from "./NewsPost";
 import CategorySlider from "../../components/CategorySlider";
 import { TOP_CATEGORIES } from "../../constants";
 import LatestVideos from "./LatestVideos";
+import Header from "../../components/Header";
 
 const TopViewCardData = [
   {
@@ -103,6 +104,7 @@ const Index = () => {
   return (
     <>
       <Grid display={"flex"} flexDirection={"column"}>
+        <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
         <TopView cardData={TopViewCardData} />
         <Popularposts cardData={PopularPostCardData} />
