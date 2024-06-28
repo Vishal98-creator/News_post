@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "10px",
     fontWeight: 500,
     fontSize: "20px",
+    // marginBottom: "50px",
   },
 }));
 

@@ -23,7 +23,7 @@ export default function Card2({ cardData }) {
         />
         <CardContent className={classes.cardcontent}>
           <Typography variant="h5">{cardData.title}</Typography>
-          <Typography variant="body2" sx={{ mt: 2, color: COLORS.lightGray }}>
+          <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
             {cardData.description}
           </Typography>
         </CardContent>
