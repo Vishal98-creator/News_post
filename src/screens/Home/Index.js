@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import TopView from "./TopView";
 import blackbgcar from "../../assets/images/blackbg-car.png";
 import musicGirl from "../../assets/images/musicGirl.png";
@@ -22,7 +22,6 @@ import LatestVideos from "./LatestVideos";
 import Header from "../../components/Header";
 import { apiCall } from "../../utils/httpClient";
 import apiEndPoints from "../../utils/apiEndPoints";
-
 
 const TopViewCardData = [
   {
@@ -104,56 +103,230 @@ const newsPostCard = [
 ];
 
 const Index = () => {
+  // const [popularVideos, setPopularVideos] = useState([]);
+  // const [featuredVideos, setFeaturedVideos] = useState([]);
+
+  // const [featuredImages, setFeaturedImages] = useState([]);
+
+  const [popularImages, setPopularImages] = useState([]);
+  console.log("popularImages: ", popularImages);
+  const [newPostImages, setNewPostImages] = useState([]);
+  const [latestVideo, setLatestVideo] = useState([]);
+  const [teandingImages, setTrandingImages] = useState([]);
+  const [trandingVideos, setTrandingVideos] = useState([]);
   const [topCardData, setTopCardData] = useState(TopViewCardData);
-  console.log("The card data is:- ",topCardData);
-  useEffect(()=> {
-       getCall();
-  },[])
-  const getCall = async()=>{
-    await handlePostList();
-  }
-  const handlePostList = async() => {
+
+  useEffect(() => {
+    getData();
+    getNewPostImages();
+    getLatestVideos();
+    getTrandingImagesPost();
+    getTrandingVideoPost();
+  }, []);
+
+  const getData = async () => {
+    await getPopularPost();
+  };
+
+  const getPopularPost = async () => {
     const data = {
-      limit: 10,
-      offset: 0
+      
+      limit: 50,
+      offset: 0,
+      filters: {
+        flag: "popular", //popular, tranding, featured
+        postType: "image", //image. video
+      },
+    };
+    try {
+      const response = await apiCall(
+        "POST",
+        apiEndPoints.GETPOSTLIST,
+        JSON.stringify(data)
+      );
+      console.log("response:==> ", response);
+      if (response) {
+        const formattedData =
+          response?.data?.posts?.length > 0
+            ? response?.data?.posts.map((item) => {
+                return {
+                  bgImg: item?.mainImage || blackbgcar,
+                  title: item?.title || "Заглавие на новина",
+                  description: "Началото на статията....",
+                };
+              })
+            : [];
+        setPopularImages(formattedData);
+      } else {
+        // setTrandingVideos(TopViewCardData);
+      }
+    } catch (error) {
+      console.error("GETPOSTLIST error :- ", error);
     }
-    try{
-      const response = await apiCall('POST', apiEndPoints.GETPOSTLIST,JSON.stringify(data))
-      //  console.log('The length of response is :- ', response?.data?.posts.length);
-       if(response) {
-        console.log('The response is getting =====>');
-        const formattedData = response?.data?.posts.map((item)=> {
+  };
+
+  const getNewPostImages = async () => {
+    const data = {
+      limit: 50,
+      offset: 0,
+      filters: {
+        // flag: "", //popular, tranding, featured
+        postType: "image", //image. video
+      },
+    };
+    try {
+      const response = await apiCall(
+        "POST",
+        apiEndPoints.GETPOSTLIST,
+        JSON.stringify(data)
+      );
+      if (response) {
+        const formattedData = response?.data?.posts.map((item) => {
           return {
-            bgImg: item?.mainImage || blackbgcar, 
-            title: item?.title || "Заглавие на новина", 
-            description: "Началото на статията...." 
-          }
-        })
-         console.log("The response is :- ", response?.data?.posts);
+            bgImg: item?.mainImage || blackbgcar,
+            title: item?.title || "Заглавие на новина",
+            description: "Началото на статията....",
+          };
+        });
+        setNewPostImages(formattedData);
         setTopCardData(formattedData);
-       }else{
-          setTopCardData(TopViewCardData)
-       }
-     
-    }catch(error){
-      console.error('GETPOSTLIST error :- ', error);
+      } else {
+        // setTrandingVideos(TopViewCardData);
+      }
+    } catch (error) {
+      console.error("GETPOSTLIST error :- ", error);
     }
-  }
+  };
+
+  const getLatestVideos = async () => {
+    const data = {
+      limit: 50,
+      offset: 0,
+      filters: {
+        flag: "", //popular, tranding, featured
+        postType: "video", //image. video
+      },
+    };
+    try {
+      const response = await apiCall(
+        "POST",
+        apiEndPoints.GETPOSTLIST,
+        JSON.stringify(data)
+      );
+      if (response) {
+        const formattedData = response?.data?.posts.map((item) => {
+          return {
+            bgImg: item?.mainImage || blackbgcar,
+            title: item?.title || "Заглавие на новина",
+            description: "Началото на статията....",
+          };
+        });
+        setLatestVideo(formattedData);
+      } else {
+        // setTrandingVideos(TopViewCardData);
+      }
+    } catch (error) {
+      console.error("GETPOSTLIST error :- ", error);
+    }
+  };
+
+  const getTrandingImagesPost = async () => {
+    const data = {
+      limit: 50,
+      offset: 0,
+      filters: {
+        flag: "tranding", //popular, tranding, featured
+        postType: "image", //image. video
+      },
+    };
+    try {
+      const response = await apiCall(
+        "POST",
+        apiEndPoints.GETPOSTLIST,
+        JSON.stringify(data)
+      );
+      if (response) {
+        const formattedData = response?.data?.posts.map((item) => {
+          return {
+            bgImg: item?.mainImage || blackbgcar,
+            title: item?.title || "Заглавие на новина",
+            description: "Началото на статията....",
+          };
+        });
+        setTrandingImages(formattedData);
+      } else {
+        // setTrandingVideos(TopViewCardData);
+      }
+    } catch (error) {
+      console.error("GETPOSTLIST error :- ", error);
+    }
+  };
+
+  const getTrandingVideoPost = async () => {
+    const data = {
+      limit: 50,
+      offset: 0,
+      filters: {
+        flag: "tranding", //popular, tranding, featured
+        postType: "video", //image. video
+      },
+    };
+    try {
+      const response = await apiCall(
+        "POST",
+        apiEndPoints.GETPOSTLIST,
+        JSON.stringify(data)
+      );
+      if (response) {
+        const formattedData = response?.data?.posts.map((item) => {
+          return {
+            bgImg: item?.mainImage || blackbgcar,
+            title: item?.title || "Заглавие на новина",
+            description: "Началото на статията....",
+          };
+        });
+        setTrandingVideos(formattedData);
+      } else {
+        setTrandingVideos(TopViewCardData);
+      }
+    } catch (error) {
+      console.error("GETPOSTLIST error :- ", error);
+    }
+  };
+
   return (
     <>
       <Grid display={"flex"} flexDirection={"column"}>
         <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
-        {/* <TopView cardData={topCardData}/> */}
-        <TopView cardData={topCardData.length!==0 ? topCardData:TopViewCardData} />
-        {/* <Popularposts cardData={PopularPostCardData}/> */}
-        <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
+        <TopView
+          cardData={topCardData.length == 0 ? topCardData : TopViewCardData}
+        />
+        <Popularposts
+          title="Popular Images"
+          cardData={popularImages.length !== 0 ? popularImages : []}
+        />
         <SportWidget />
-        <NewsPost cardData={topCardData.length!==0 ? topCardData:newsPostCard} />
-        <LatestVideos cardData={newsPostCard} />
-        <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
-        <LatestVideos cardData={newsPostCard} />
-        <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
+        <NewsPost
+          title="New Post"
+          cardData={newPostImages?.length !== 0 ? newPostImages : []}
+        />
+        <LatestVideos
+          title="Latest Videos"
+          cardData={latestVideo?.length > 0 ? latestVideo : []}
+        />
+        <Popularposts
+          title="Trandy Posts"
+          cardData={topCardData?.length > 0 ? topCardData : []}
+        />
+        <LatestVideos
+          title="Tranding Videos"
+          cardData={trandingVideos?.length > 0 ? trandingVideos : []}
+        />
+        <Popularposts
+          title="Top Posts"
+          cardData={topCardData?.length > 0 ? topCardData : []}
+        />
       </Grid>
     </>
   );

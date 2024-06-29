@@ -5,14 +5,14 @@ import { COLORS } from "../../constants";
 import { makeStyles } from "@mui/styles";
 import Card3 from "../../components/Card3";
 
-const NewsPost = ({ cardData }) => {
+const NewsPost = ({ cardData, title }) => {
   const classes = useStyles();
   return (
     <>
       <Box sx={{ mt: 5 }}>
         <Box display={"flex"} justifyContent={"space-between"}>
           <Box varient="h4" className={classes.sectionTitle}>
-            Нови
+            {title}
           </Box>
           <Box>
             <Button sx={{ marginLeft: 2 }}>

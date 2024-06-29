@@ -7,7 +7,11 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import TextEditor from "../../../components/TextEditor";
 import { COLORS } from "../../../constants";
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const AddPostForm = ({
   postType = 1,
@@ -25,6 +29,11 @@ const AddPostForm = ({
   setTagText,
   tags,
   setTags,
+  images,
+  setImages,
+  handleFlagTypeChange,
+  handleImageDelete,
+  flagType,
 }) => {
   // postType = 1 ? 'Send post :'Send Video'
   const classes = useStyles();
@@ -94,6 +103,20 @@ const AddPostForm = ({
                 </Box>
               </Box>
             )}
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Flag type</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={flagType}
+                label="Flag type"
+                onChange={handleFlagTypeChange}
+              >
+                <MenuItem value={"popular"}>Popular</MenuItem>
+                <MenuItem value={"trendy"}>Trendy</MenuItem>
+                <MenuItem value={"top"}>Top</MenuItem>
+              </Select>
+            </FormControl>
             <Box sx={{ mt: 5 }}>
               <Box>Explanation</Box>
               <TextEditor value={value} setValue={setValue} />
@@ -121,6 +144,33 @@ const AddPostForm = ({
                 />
               </Box>
             )}
+            <div>
+              <div
+                className="image-gallery"
+                //style={classes.gallery}
+              >
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className="image-item"
+                    // style={classes.imageItem}
+                  >
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={`Uploaded ${index}`}
+                      // style={classes.image}
+                    />
+                    <div
+                      className="delete-icon"
+                      // style={classes.deleteIcon}
+                      onClick={() => handleImageDelete(index)}
+                    >
+                      X
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
             <Box display={"flex"} justifyContent={"end"}>
               <Button
                 onClick={handlePublic}
@@ -141,4 +191,28 @@ export default AddPostForm;
 const useStyles = makeStyles((theme) => ({
   activeBtn: {},
   cardcontent: {},
+  gallery: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "10px",
+  },
+  imageItem: {
+    position: "relative",
+    width: "100px",
+    height: "100px",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+  deleteIcon: {
+    position: "absolute",
+    top: "5px",
+    right: "5px",
+    backgroundColor: "red",
+    color: "white",
+    padding: "2px 5px",
+    cursor: "pointer",
+  },
 }));

@@ -15,9 +15,19 @@ const AddPost = () => {
   const [galleryImages, setGalleryImages] = useState([]);
   const [youTubeUrls, setYouTubeUrls] = useState(null);
   const [tagText, setTagText] = useState("");
-  console.log('tagText: ', tagText);
+  console.log("tagText: ", tagText);
   const [tags, setTags] = useState([]);
-  console.log('tags: ', tags);
+  console.log("tags: ", tags);
+  const [images, setImages] = useState([]);
+  const [flagType, setFlagType] = React.useState('');
+
+  const handleFlagTypeChange = (event) => {
+    setFlagType(event.target.value);
+  };
+
+  const handleImageDelete = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
 
   const handleChange = async (file) => {
     const formData = new FormData();
@@ -26,22 +36,28 @@ const AddPost = () => {
     setFile(response.data.url);
   };
 
-  const handleImageGallery = async (file) => {
+  const handleImageGallery = async (files) => {
+    console.log("file: ", file);
     const formData = new FormData();
-    formData.append("image", file);
-    const response = await imageUploadOnServer(formData);
-    setGalleryImages(response.data.url);
+    setImages((prevImages) => [...prevImages, ...files]);
+    // formData.append("image", file);
+    // const response = await imageUploadOnServer(formData);
+    // setGalleryImages(response.data.url);
   };
 
   const handlePublic = async () => {
     if (title && value && postType) {
       const formData = new FormData();
-      // formData.append("files", title);
       formData.append("title", title);
       formData.append("content", value);
       formData.append("postType", postType);
       formData.append("mainImage", file);
+      formData.append("mainVideo", youTubeUrls);
       formData.append("tags", JSON.stringify(["#test"]));
+      formData.append("flag", flagType);
+      images.length > 0 && images.forEach((image, index) => {
+        formData.append(`files`, image); // Append image with key 'files'
+      });
       try {
         const response = await apiCall("POST", apiEndPoints.ADDPOST, formData, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -76,6 +92,11 @@ const AddPost = () => {
         setTags={setTags}
         tagText={tagText}
         setTagText={setTagText}
+        images={images}
+        setImages={setImages}
+        handleImageDelete={handleImageDelete}
+        flagType={flagType}
+        handleFlagTypeChange={handleFlagTypeChange}
       />
     </>
   );

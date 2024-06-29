@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Card1 from "../../components/Card1";
 import CardSlider from "../../components/CardSlider";
-import blackbgcar from '../../assets/images/blackbg-car.png'
+import blackbgcar from "../../assets/images/blackbg-car.png";
 
 const cardDataArray = [
   { bgImg: blackbgcar, title: "Title 1", description: "Description 1" },
@@ -12,9 +12,8 @@ const cardDataArray = [
 const TopView = (props) => {
   const { cardData } = props;
 
- console.log("the cardata inside top view ====>>",cardData)
- console.log("the cardata length ====>>",cardData.length)
   return (
+    
     <Grid container spacing={2}>
       <Grid
         item
@@ -26,33 +25,41 @@ const TopView = (props) => {
       >
         <Card1 cardData={cardData[0]} />
       </Grid>
-      {cardData.length >1 ?
-      <Grid
-        item
-        xs={12}
-        sm={6}
-        md={3}
-        display={"flex"}
-        justifyContent={"center"}
-      >
-        <Card1 cardData={cardData[1]} />
-      </Grid>
-: ""} 
-{cardData.length> 2 ?
-      <Grid
-        item
-        xs={12}
-        sm={6}
-        md={6}
-        display={"flex"}
-        justifyContent={"center"}
-      >
-        {/* <Card1 cardData={cardData[0]}/> */}
-        <CardSlider cardDataArray={cardData.length>2 ?cardData.slice(2): cardDataArray} />
-        {/* <CardSlider cardDataArray={dataCard}/> */}
-        {/* <CardSlider cardDataArray={cardDataArray}/> */}
-      </Grid>
-: ""}
+      {cardData.length > 1 ? (
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={3}
+          display={"flex"}
+          justifyContent={"center"}
+        >
+          <Card1 cardData={cardData[1]} />
+        </Grid>
+      ) : (
+        ""
+      )}
+      {cardData.length > 2 ? (
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={6}
+          display={"flex"}
+          justifyContent={"center"}
+        >
+          {/* <Card1 cardData={cardData[0]}/> */}
+          <CardSlider
+            cardDataArray={
+              cardData.length > 2 ? cardData.slice(2) : cardDataArray
+            }
+          />
+          {/* <CardSlider cardDataArray={dataCard}/> */}
+          {/* <CardSlider cardDataArray={cardDataArray}/> */}
+        </Grid>
+      ) : (
+        ""
+      )}
     </Grid>
   );
 };

@@ -9,7 +9,7 @@ import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { COLORS } from "../../constants";
 import { useNavigate } from "react-router-dom";
 
-function Responsive({ cardData }) {
+function Responsive({ cardData, title }) {
   const navigate = useNavigate();
   const sliderRef = useRef(null);
   const classes = useStyles();
@@ -53,7 +53,7 @@ function Responsive({ cardData }) {
     <Box sx={{ mt: 8, minHeight: "100%" }}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Box varient="h4" className={classes.sectionTitle}>
-          Популярни
+          {title}
         </Box>
         <Box>
           <Button onClick={() => sliderRef.current.slickPrev()}>

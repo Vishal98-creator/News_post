@@ -12,7 +12,7 @@ const Index = () => {
 
   useEffect(() => {
     let html =
-      '<h2><strong>asdasdadsa</strong></h2><p><br></p><p><img src="https://news-blog-post-bucket.s3.eu-north-1.amazonaws.com/images/1719644726383_thali-food.jpg"></p><p><br></p><p>sdfsdfsdfdfsdfsdfsdfsdfs</p><p>asdasdadasdasdad</p><p>adasdasdasdasdasdasdasdadssad</p><p>asdasdasdaczxczxczcx</p>';
+      '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p><br></p><p><img src=\"https://news-blog-post-bucket.s3.eu-north-1.amazonaws.com/images/1719665378123_musicalMan.png\"></p><p><br></p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>';
 
     // Parse the HTML and modify the image elements
     const parser = new DOMParser();
