@@ -7,10 +7,8 @@ import Card2 from "../../components/Card2";
 import { Box, Button } from "@mui/material";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { COLORS } from "../../constants";
-import { useNavigate } from "react-router-dom";
 
 function Responsive({ cardData }) {
-  const navigate = useNavigate();
   const sliderRef = useRef(null);
   const classes = useStyles();
 
@@ -71,7 +69,7 @@ function Responsive({ cardData }) {
         <Slider ref={sliderRef} {...settings}>
           {cardData.map((card, index) => {
             return (
-              <div key={index} onClick={() => navigate("/view-post/5")}>
+              <div key={index}>
                 <Card2 cardData={card} />
               </div>
             );
