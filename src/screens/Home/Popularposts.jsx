@@ -10,7 +10,6 @@ import { COLORS } from "../../constants";
 import { useNavigate } from "react-router-dom";
 
 function Responsive({ cardData, title }) {
-  const navigate = useNavigate();
   const sliderRef = useRef(null);
   const classes = useStyles();
 
@@ -71,7 +70,7 @@ function Responsive({ cardData, title }) {
         <Slider ref={sliderRef} {...settings}>
           {cardData.map((card, index) => {
             return (
-              <div key={index} onClick={() => navigate("/view-post/5")}>
+              <div key={index}>
                 <Card2 cardData={card} />
               </div>
             );

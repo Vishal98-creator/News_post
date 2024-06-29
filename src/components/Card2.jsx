@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     // boxShadow: "0px 2px 10px rgb(0 0 0 / 40%)",
   },
   cardContent: {
+    cursor: "pointer",
     textAlign: "center", // Center align text content
     padding: theme.spacing(2),
   },
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Card2 = ({ cardData }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -44,7 +47,10 @@ const Card2 = ({ cardData }) => {
           title="green iguana"
           className={classes.cardImg}
         />
-        <CardContent className={classes.cardContent}>
+        <CardContent
+          className={classes.cardContent}
+          onClick={() => navigate(`/view-post/${cardData.id}`)}
+        >
           <Typography variant="h5">{cardData.title}</Typography>
           <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
             {cardData.description}

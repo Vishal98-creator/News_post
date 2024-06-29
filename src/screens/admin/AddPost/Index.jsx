@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import ProfileHeader from "./ProfileHeader";
 import AddPostForm from "./AddPostForm";
 import SendButtons from "./SendButtons";
-import { imageUploadOnServer } from "../../../utils/helperFunctios";
+import {
+  imageUploadOnServer,
+  notifyError,
+  notifySuccess,
+} from "../../../utils/helperFunctios";
 import { apiCall } from "../../../utils/httpClient";
 import apiEndPoints from "../../../utils/apiEndPoints";
 import Header from "../../../components/Header";
@@ -62,9 +66,10 @@ const AddPost = () => {
         const response = await apiCall("POST", apiEndPoints.ADDPOST, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        window.alert("Post Public");
+        // window.alert("Post Public");
+        notifySuccess("Post Public successfull!");
       } catch (error) {
-        console.error("Error IN POST:", error);
+        notifyError("Post Sending Failed");
       }
     } else {
       console.log("Enter required Fields");
