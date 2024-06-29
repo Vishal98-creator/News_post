@@ -19,6 +19,9 @@ function LatestVideos({ cardData }) {
   const classes = useStyles();
   const isLargeScreen = useMediaQuery("(min-width:1420px)");
   const isMediumScreen = useMediaQuery("(max-width:970px)");
+  console.log("the video data inside latest video ======>>>>",cardData);
+  const url1 = cardData[0].mainVideo;
+  // const slicedCardData = cardData.slice(1);
   const settings = {
     className: "slider variable-width",
     // dots: true,
@@ -53,6 +56,20 @@ function LatestVideos({ cardData }) {
       },
     ],
   };
+  const renderRows = (data) => {
+    const rows = [];
+    for (let i = 0; i < data.length; i += 2) {
+      rows.push(
+        <div key={i} style={{ display: "flex", marginBottom: "10px" }}>
+          <VideoCard3 cardData={data[i]} navigate={navigate} videoUrl={data[i]?.mainVideo || url1} />
+          {data[i + 1] && (
+            <VideoCard3 cardData={data[i + 1]} navigate={navigate} videoUrl={data[i + 1]?.mainVideo || url1} />
+          )}
+        </div>
+      );
+    }
+    return rows;
+  };
   return (
     <Box className={classes.sliderContainer} sx={{ mt: 8 }}>
       <Box display={"flex"} justifyContent={"space-between"}>
@@ -79,25 +96,12 @@ function LatestVideos({ cardData }) {
               width={"100%"}
               showTitleBar
               navigate={navigate}
+              videoUrl={url1} 
+              // cardData={cardData}
             />
           </div>
-          <div
-            style={{ width: 400, marginTop: "0px" }}
-            className="c-small-card-react-slick"
-          >
-            <Card3 cardData={cardData[1]} />
-            <Card3 cardData={cardData[2]} />
-            {/* <VideoCard3 cardData={cardData[2]} navigate={navigate} />
-            <VideoCard3 cardData={cardData[2]} navigate={navigate} /> */}
-          </div>
-          <div style={{ width: 400 }} className="c-small-card-react-slick">
-            <Card3 cardData={cardData[3]} />
-            <Card3 cardData={cardData[4]} />
-          </div>
-          <div style={{ width: 300 }} className="c-small-card-react-slick">
-            <Card3 cardData={cardData[5]} />
-            <Card3 cardData={cardData[0]} />
-          </div>
+         
+          {renderRows(cardData.slice(1))}
         </Slider>
       ) : (
         ""

@@ -74,31 +74,37 @@ const newsPostCard = [
     bgImg: mobileImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: boatsImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: rabitImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: bluebgCar,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: crossImges,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: musicalMan,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
 ];
 

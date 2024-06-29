@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 import { COLORS } from "../constants";
 import { makeStyles } from "@mui/styles";
 
-const VideoCard = ({ height, showTitleBar, navigate, width }) => {
+const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl }) => {
   const classes = useStyles();
   return (
     <Box
@@ -28,7 +28,8 @@ const VideoCard = ({ height, showTitleBar, navigate, width }) => {
         onClick={() => navigate("/view-post/5")}
       >
         <ReactPlayer
-          url="https://www.youtube.com/watch?v=UluB8Rg_AQA"
+          url = {videoUrl}
+          // url="https://www.youtube.com/watch?v=UluB8Rg_AQA"
           width="100%"
           height="100%"
           controls
