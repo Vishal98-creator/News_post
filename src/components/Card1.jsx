@@ -13,13 +13,13 @@ export default function Card1({ cardData }) {
       <CardMedia
         component="img"
         height="100%"
-        image={cardData.bgImg}
+        image={cardData?.bgImg}
         alt="Paella dish"
       />
       <CardContent className={classes.cardcontent}>
-        <Typography variant="h5">{cardData.title}</Typography>
+        <Typography variant="h5">{cardData?.title}</Typography>
         <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
-          {cardData.description}
+          {cardData?.description}
         </Typography>
       </CardContent>
     </Card>

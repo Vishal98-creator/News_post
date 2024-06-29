@@ -23,90 +23,7 @@ import Header from "../../components/Header";
 import { apiCall } from "../../utils/httpClient";
 import apiEndPoints from "../../utils/apiEndPoints";
 
-const TopViewCardData = [
-  {
-    bgImg: blackbgcar,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: musicGirl,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-];
 
-const PopularPostCardData = [
-  {
-    bgImg: pinkbgCar,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: foodImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: sportImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: laptopImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: pinkbgCar,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-  {
-    bgImg: foodImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-  },
-];
-
-const newsPostCard = [
-  {
-    bgImg: mobileImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-  },
-  {
-    bgImg: boatsImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-  },
-  {
-    bgImg: rabitImg,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-  },
-  {
-    bgImg: bluebgCar,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-  },
-  {
-    bgImg: crossImges,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-  },
-  {
-    bgImg: musicalMan,
-    title: "Заглавие на новина",
-    description: "Началото на статията....",
-    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-  },
-];
 
 const Index = () => {
   // const [popularVideos, setPopularVideos] = useState([]);
@@ -120,7 +37,7 @@ const Index = () => {
   const [latestVideo, setLatestVideo] = useState([]);
   const [teandingImages, setTrandingImages] = useState([]);
   const [trandingVideos, setTrandingVideos] = useState([]);
-  const [topCardData, setTopCardData] = useState(TopViewCardData);
+  const [topCardData, setTopCardData] = useState([]);
 
   useEffect(() => {
     getData();
@@ -293,7 +210,7 @@ const Index = () => {
         });
         setTrandingVideos(formattedData);
       } else {
-        setTrandingVideos(TopViewCardData);
+        // setTrandingVideos(TopViewCardData);
       }
     } catch (error) {
       console.error("GETPOSTLIST error :- ", error);
@@ -306,7 +223,7 @@ const Index = () => {
         <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
         <TopView
-          cardData={topCardData.length == 0 ? topCardData : TopViewCardData}
+          cardData={topCardData.length == 0 ? topCardData : []}
         />
         <Popularposts
           title="Popular Images"
