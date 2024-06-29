@@ -4,7 +4,8 @@ import ReactPlayer from "react-player";
 import { COLORS } from "../constants";
 import { makeStyles } from "@mui/styles";
 
-const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl }) => {
+const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl, cardData }) => {
+  console.log('cardData: ====>>> ', cardData);
   const classes = useStyles();
   return (
     <Box
@@ -35,9 +36,9 @@ const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl }) => {
           controls
         />
       </div>
-      {showTitleBar && (
+      {showTitleBar && cardData.length > 0 && (
         <Box className={classes.cardcontent}>
-          <Typography variant="h5">{"Заглавие на новина"}</Typography>
+          <Typography variant="h5">{cardData[0]?.title}</Typography>
           <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
             Началото на статията....
           </Typography>

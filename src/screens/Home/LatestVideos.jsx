@@ -97,7 +97,7 @@ function LatestVideos({ cardData }) {
               showTitleBar
               navigate={navigate}
               videoUrl={url1} 
-              // cardData={cardData}
+              cardData={cardData}
             />
           </div>
          
