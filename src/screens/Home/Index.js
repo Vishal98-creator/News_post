@@ -75,36 +75,44 @@ const newsPostCard = [
     bgImg: mobileImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: boatsImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: rabitImg,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: bluebgCar,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: crossImges,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+     mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
   {
     bgImg: musicalMan,
     title: "Заглавие на новина",
     description: "Началото на статията....",
+    mainVideo: "https://www.youtube.com/watch?v=UluB8Rg_AQA"
   },
 ];
 
 const Index = () => {
   const [topCardData, setTopCardData] = useState(TopViewCardData);
+  const [videoCardData, setVideoCardData] = useState(newsPostCard);
+  console.log('videoCardData ======>>>>: ', videoCardData);
   console.log("The card data is:- ",topCardData);
   useEffect(()=> {
        getCall();
@@ -124,15 +132,24 @@ const Index = () => {
         console.log('The response is getting =====>');
         const formattedData = response?.data?.posts.map((item)=> {
           return {
+            id: item?._id || "",
+            content: item?.content || '',
+            images: item?.images || [],
+            videos: item?.videos || [],
             bgImg: item?.mainImage || blackbgcar, 
             title: item?.title || "Заглавие на новина", 
-            description: "Началото на статията...." 
+            description: "Началото на статията...." ,
+            postType: item?.postType,
+            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
           }
         })
          console.log("The response is :- ", response?.data?.posts);
+         const videoData = formattedData.filter((item)=> item.postType==="video");
+         setVideoCardData(videoData);
         setTopCardData(formattedData);
        }else{
           setTopCardData(TopViewCardData)
+          setVideoCardData(newsPostCard)
        }
      
     }catch(error){
@@ -150,9 +167,9 @@ const Index = () => {
         <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
         <SportWidget />
         <NewsPost cardData={topCardData.length!==0 ? topCardData:newsPostCard} />
-        <LatestVideos cardData={newsPostCard} />
+        <LatestVideos cardData={videoCardData.length!==0 ? videoCardData:newsPostCard}/>
         <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
-        <LatestVideos cardData={newsPostCard} />
+        <LatestVideos cardData={videoCardData.length!==0 ? videoCardData:newsPostCard}/>
         <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
       </Grid>
     </>

@@ -7,17 +7,20 @@ import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 import VideoCard from "./VideoCard";
 
-export default function VideoCard3({ cardData, navigate }) {
+export default function VideoCard3({ cardData, navigate, videoUrl }) {
   const classes = useStyles();
+  console.log("The video card23333 ===>>",cardData);
   return (
-    <Card sx={{ width: "100%", display: "flex" }}>
-      <div className="mang-margin">
-        <VideoCard height={"220px"} width={"100%"} navigate={navigate} />
-      </div>
-      <CardContent className={classes.cardcontent}>
-        <Typography variant="h5">{cardData.title}</Typography>
-        <Typography variant="body2" sx={{ mt: 2, color: COLORS.lightGray }}>
-          {cardData.description}
+    <Card className={classes.card}>
+      <CardMedia className={classes.media}>
+        <VideoCard height={"100%"} width={"100%"} navigate={navigate} videoUrl={videoUrl} />
+      </CardMedia>
+      <CardContent className={classes.content}>
+        <Typography variant="h5" className={classes.title}>
+          {cardData.title}
+        </Typography>
+        <Typography variant="body2" className={classes.description}>
+          Preview..
         </Typography>
       </CardContent>
     </Card>
@@ -25,16 +28,43 @@ export default function VideoCard3({ cardData, navigate }) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  cardImg: {
-    margin: "10px",
+  card: {
+    display: "flex",
+    alignItems: "center",
     borderRadius: "12px",
-    width: "340px",
-    height: "190px",
+    boxShadow: "none",
+    border: "1px solid #e0e0e0",
+    width: "100%",
+    height: "180px",
+    paddingTop: '20px'
+   
   },
-  cardcontent: {
-    borderRadius: "12px",
-    margin: "0px 0px",
-    color: "black",
-    height: "117px",
+  media: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: "50%",
+    height: "100%",
+    borderRadius: "12px 12px 12px 12px",
+    overflow: "hidden",
+    marginBottom: '20px',
+    marginLeft: '10px'
+  },
+  content: {
+    // backgroundColor: 'red',
+    padding: "16px",
+    width: "50%",
+    height: '100%'
+  },
+  title: {
+    fontSize: "1.25rem",
+    fontWeight: 600,
+  },
+  description: {
+    color: COLORS.lightGray,
+    marginTop: "8px",
   },
 }));
+
+

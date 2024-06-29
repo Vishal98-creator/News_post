@@ -27,10 +27,11 @@ const AddPost = () => {
   };
 
   const handleImageGallery = async (file) => {
+    console.log('file ====>>>>: ', file);
     const formData = new FormData();
     formData.append("image", file);
-    const response = await imageUploadOnServer(formData);
-    setGalleryImages(response.data.url);
+    // const response = await imageUploadOnServer(formData);
+    // setGalleryImages(response.data.url);
   };
 
   const handlePublic = async () => {
