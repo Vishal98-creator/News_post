@@ -12,6 +12,7 @@ const cardDataArray = [
 ];
 
 export default function ImageSlider() {
+  // const {cardDataArray} = props;
   const classes = useStyles();
   const [currentSlide, setCurrentSlide] = useState(0);
 

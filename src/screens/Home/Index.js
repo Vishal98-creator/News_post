@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import TopView from "./TopView";
 import blackbgcar from "../../assets/images/blackbg-car.png";
 import musicGirl from "../../assets/images/musicGirl.png";
@@ -20,6 +20,9 @@ import CategorySlider from "../../components/CategorySlider";
 import { TOP_CATEGORIES } from "../../constants";
 import LatestVideos from "./LatestVideos";
 import Header from "../../components/Header";
+import { apiCall } from "../../utils/httpClient";
+import apiEndPoints from "../../utils/apiEndPoints";
+
 
 const TopViewCardData = [
   {
@@ -101,12 +104,41 @@ const newsPostCard = [
 ];
 
 const Index = () => {
+  const [topCardData, setTopCardData] = useState([]);
+  console.log("The card data is:- ",topCardData);
+  useEffect(()=> {
+       getCall();
+  },[])
+  const getCall = async()=>{
+    await handlePostList();
+  }
+  const handlePostList = async() => {
+    const data = {
+      limit: 10,
+      offset: 0
+    }
+    try{
+      const response = await apiCall('POST', apiEndPoints.GETPOSTLIST,JSON.stringify(data))
+      const formattedData = response?.data?.posts.map((item)=> {
+        return {
+          bgImg: item?.mainImage || blackbgcar, 
+          title: item?.title || "Заглавие на новина", 
+          description: "Началото на статията...." 
+        }
+      })
+      setTopCardData(formattedData);
+      console.log("The response is :- ", response?.data?.posts);
+    }catch(error){
+      console.error('GETPOSTLIST error :- ', error);
+    }
+  }
   return (
     <>
       <Grid display={"flex"} flexDirection={"column"}>
         <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
-        <TopView cardData={TopViewCardData} />
+        {/* <TopView cardData={TopViewCardData}/> */}
+        <TopView cardData={topCardData.length!==0 ? topCardData:TopViewCardData} />
         <Popularposts cardData={PopularPostCardData} />
         <SportWidget />
         <NewsPost cardData={newsPostCard} />
