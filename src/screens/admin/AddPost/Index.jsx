@@ -12,6 +12,12 @@ const AddPost = () => {
   const [value, setValue] = useState("");
   const [title, setTitile] = useState(null);
   const [postType, setPostType] = useState("image");
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [youTubeUrls, setYouTubeUrls] = useState(null);
+  const [tagText, setTagText] = useState("");
+  console.log('tagText: ', tagText);
+  const [tags, setTags] = useState([]);
+  console.log('tags: ', tags);
 
   const handleChange = async (file) => {
     const formData = new FormData();
@@ -20,8 +26,14 @@ const AddPost = () => {
     setFile(response.data.url);
   };
 
+  const handleImageGallery = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    const response = await imageUploadOnServer(formData);
+    setGalleryImages(response.data.url);
+  };
+
   const handlePublic = async () => {
-    console.log(": call");
     if (title && value && postType) {
       const formData = new FormData();
       // formData.append("files", title);
@@ -42,11 +54,12 @@ const AddPost = () => {
       console.log("Enter required Fields");
     }
   };
+
   return (
     <>
       <Header />
       <ProfileHeader />
-      <SendButtons />
+      <SendButtons setPostType={setPostType} postType={postType} />
       <AddPostForm
         file={file}
         setFile={setFile}
@@ -56,6 +69,13 @@ const AddPost = () => {
         titile={title}
         setTitile={setTitile}
         handlePublic={handlePublic}
+        postType={postType}
+        handleImageGallery={handleImageGallery}
+        setYouTubeUrls={setYouTubeUrls}
+        tags={tags}
+        setTags={setTags}
+        tagText={tagText}
+        setTagText={setTagText}
       />
     </>
   );

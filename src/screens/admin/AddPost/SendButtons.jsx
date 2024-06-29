@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import { COLORS } from "../../../constants";
 
-const SendButtons = ({ postType = 1 }) => {
+const SendButtons = ({ postType, setPostType }) => {
   return (
     <Box
       sx={{
@@ -15,21 +15,23 @@ const SendButtons = ({ postType = 1 }) => {
     >
       <Button
         sx={
-          postType === 1
+          postType === "image"
             ? { backgroundColor: COLORS.gray, fontWeight: 500 }
             : { backgroundColor: COLORS.white }
         }
+        onClick={() => setPostType("image")}
       >
         Send Post
       </Button>
       <Button
         sx={
-          postType === 2
-            ? { backgroundColor: COLORS.lightGray, fontWeight: 500, ml: 2 }
+          postType === "video"
+            ? { backgroundColor: COLORS.gray, fontWeight: 500, ml: 2 }
             : { backgroundColor: COLORS.white, ml: 2 }
         }
+        onClick={() => setPostType("video")}
       >
-        Send Post
+        Send Video
       </Button>
     </Box>
   );

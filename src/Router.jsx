@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import Home from "./screens/Home/Index";
+import PostDetails from "./screens/PostDetails/Index";
 import Footer from "./components/Footer";
 import { createRoot } from "react-dom/client";
 import {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/add-post",
     element: <AddPost />,
+  },
+  {
+    path: "/view-post/:post_id",
+    element: <PostDetails />,
   },
 ]);
 
