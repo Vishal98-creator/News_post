@@ -16,37 +16,34 @@ import { COLORS } from "../constants";
 
 const Footer = () => {
   const classes = useStyles();
-  const isMediumScreen = useMediaQuery("(max-width:767px)");
+  const isMediumScreen = useMediaQuery("(max-width:842px)");
   return (
     <Box
       sx={{
-        maxWidth: { xs: "90%", md: "60%" },
+        maxWidth: { xs: "90%", md: "70%" },
         marginTop: "100px",
         backgroundColor: "rgb(245, 245, 245)",
         padding: "60px",
         borderRadius: { xs: "0 30px 30px 0", md: "0 60px 60px 0" },
+        position: "relative",
+        left: { xs: "-10%", md: "-12%" },
       }}
     >
       {!isMediumScreen ? (
-        <Box>
-          <Grid
-            container
-            spacing={3}
-            sx={{ marginLeft: { xs: "5px", md: "15px", marginRight: "40px" } }}
-          >
-            <Grid
-              item
-              xs={12}
-              md={7}
-              sx={{
-                marginRight: "40px",
-              }}
-            >
-              <div className={classes.reddivstyle}>
-                <div className={classes.reddiv}></div>
-                <Typography variant="h4">Party News</Typography>
-              </div>
-
+        <Box sx={{ marginLeft: "130px" }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={8}>
+              <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+                <div className={classes.reddivstyle}>
+                  <div className={classes.reddiv}></div>
+                  <Typography
+                    variant="h5"
+                    sx={{ color: "black", fontWeight: "bold" }}
+                  >
+                    Party News
+                  </Typography>
+                </div>
+              </Box>
               <Typography
                 variant="body2"
                 sx={{
@@ -56,6 +53,7 @@ const Footer = () => {
                   letterSpacing: "0.1rem",
                   lineHeight: { xs: "24px", md: "27px" },
                   fontWeight: "400",
+                  paddingRight: "100px",
                 }}
               >
                 Lorem Ipsum Dolor Sit Amet, Consectetur Adipisicing Elit, Sed Do
@@ -67,12 +65,13 @@ const Footer = () => {
                 Id Aliquet Lectus Proin
               </Typography>
             </Grid>
-            <Grid item xs={12} md={3}>
+
+            <Grid item xs={12} md={4}>
               <div className={classes.reddivstyle}>
                 <div className={classes.reddiv}></div>
                 <Typography
                   variant="h5"
-                  sx={{ color: COLORS.lightGray, fontWeight: "bold" }}
+                  sx={{ color: "black", fontWeight: "bold" }}
                 >
                   Категории
                 </Typography>
@@ -80,6 +79,7 @@ const Footer = () => {
               <Typography
                 variant="body2"
                 sx={{
+                  // marginLeft: "200px",
                   marginTop: "20px",
                   color: "text.secondary",
                   fontSize: { xs: "16px", md: "18px" },
@@ -100,40 +100,33 @@ const Footer = () => {
                 <br />
               </Typography>
             </Grid>
-          </Grid>
 
-          {/* Second part */}
-          <Grid
-            container
-            spacing={3}
-            sx={{ marginLeft: { xs: "5px", md: "15px" } }}
-          >
-            <Grid item xs={12} md={7} sx={{ marginRight: "40px" }}>
-              <div className={classes.reddivstyle}>
-                <div className={classes.reddiv}></div>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    marginTop: "20px",
-                    color: COLORS.lightGray,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Newsletters
-                </Typography>
-              </div>
+            <Grid item xs={12} md={8}>
+              <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+                <div className={classes.reddivstyle}>
+                  <div className={classes.reddiv}></div>
+                  <Typography
+                    variant="h5"
+                    sx={{ color: "black", fontWeight: "bold" }}
+                  >
+                    Newsletters
+                  </Typography>
+                </div>
+              </Box>
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   marginTop: "10px",
                   width: { xs: "100%", md: "auto" },
+                  paddingRight: "100px",
                 }}
               >
                 <TextField
                   variant="outlined"
                   size="small"
                   placeholder="Напишете Имеил Си"
+                  fullWidth
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -149,24 +142,21 @@ const Footer = () => {
                       "& .MuiOutlinedInput-notchedOutline": {
                         border: "none",
                       },
-                      backgroundColor: "white", // Change inside color to white
+                      backgroundColor: "white",
                       borderRadius: "12px",
                     },
                   }}
-                  sx={{ flexGrow: 1 }}
+                  // sx={{ flexGrow: 1 }}
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={3}>
+
+            <Grid item xs={12} md={4}>
               <div className={classes.reddivstyle}>
                 <div className={classes.reddiv}></div>
                 <Typography
-                  variant="h6"
-                  sx={{
-                    color: COLORS.lightGray,
-                    fontWeight: "bold",
-                    marginTop: "20px",
-                  }}
+                  variant="h5"
+                  sx={{ color: "black", fontWeight: "bold" }}
                 >
                   Social Network
                 </Typography>
@@ -175,26 +165,40 @@ const Footer = () => {
                 variant="contained"
                 startIcon={<Instagram />}
                 sx={{
-                  marginTop: "10px",
-                  marginLeft: "45px",
-                  backgroundColor: "#E1306C",
+                  marginTop: "20px",
+                  background:
+                    "linear-gradient(45deg, #f58529 30%, #e1306c 50%, #962fbf 70%, #4f5bd5 100%)",
                   color: "#fff",
+                  borderRadius: "50px",
+                  padding: "10px 40px",
+                  textTransform: "none",
+                  "&:hover": {
+                    background:
+                      "linear-gradient(45deg, #f58529 30%, #e1306c 50%, #962fbf 70%, #4f5bd5 100%)",
+                  },
                 }}
               >
                 Instagram
               </Button>
             </Grid>
           </Grid>
+
+          {/* saction three */}
           <Box
             sx={{
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
-              justifyContent: "space-between",
+              justifyContent: "space-around",
               marginTop: "40px",
               backgroundColor: "#E0E0E0",
               padding: "10px",
-              borderRadius: "10px",
+              borderRadius: "0px 13px 13px 0px",
               textAlign: { xs: "center", md: "left" },
+              // position: "relative",
+              position: "relative",
+              left: { xs: "-10%", md: "-19%" },
+              paddingLeft: "75px",
+              width: "100%",
             }}
           >
             <Typography
@@ -214,25 +218,49 @@ const Footer = () => {
       ) : (
         <Box
           sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            justifyContent: "space-between",
-            // marginTop: "40px",
-            // backgroundColor: "#E0E0E0",
-            // padding: "10px",
-            // borderRadius: "20px",
-            textAlign: { xs: "center", md: "left" },
+            maxWidth: { xs: "100%", md: "70%" },
+            // marginTop: "100px",
+            backgroundColor: "rgb(245, 245, 245)",
+            // padding: "60px",
+            borderRadius: { xs: "0 30px 30px 0", md: "0 60px 60px 0" },
+            position: "relative",
+            left: { xs: "-10%", md: "-12%" },
           }}
         >
-          <Typography
-            variant="body2"
-            sx={{ color: "text.secondary", fontSize: "17px", padding: "20px" }}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              justifyContent: "space-around",
+              // marginTop: "40px",
+              backgroundColor: "#E0E0E0",
+              padding: "10px",
+              borderRadius: "0px 13px 13px 0px",
+              textAlign: { xs: "center", md: "left" },
+              // position: "relative",
+              position: "relative",
+              left: { xs: "-10%", md: "-19%" },
+              paddingLeft: "75px",
+              width: "100%",
+            }}
           >
-            Privacy Policy | Terms & Conditions
-          </Typography>
-          <Typography variant="body2" sx={{ fontSize: "17px", width: "100%" }}>
-            All Copyright (c) 2024 Reserved
-          </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "text.secondary",
+                fontSize: "17px",
+                paddingBottom: "10px",
+              }}
+            >
+              Privacy Policy | Terms & Conditions
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: "text.secondary", fontSize: "17px" }}
+            >
+              All Copyright (c) 2024 Reserved
+            </Typography>
+          </Box>
         </Box>
       )}
     </Box>
@@ -259,7 +287,17 @@ const useStyles = makeStyles((theme) => ({
   reddivstyle: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
     gap: "10px",
+  },
+  reddivstyle2: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "20px",
+  },
+  reddiv2: {
+    width: "5px",
+    height: "11px",
+    backgroundColor: "red",
+    marginRight: "10px",
   },
 }));

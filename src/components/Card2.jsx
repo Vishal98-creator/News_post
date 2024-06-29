@@ -7,21 +7,44 @@ import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 import { Box } from "@mui/material";
 
-export default function Card2({ cardData }) {
+const useStyles = makeStyles((theme) => ({
+  card: {
+    // boxShadow: "0px 2px 10px rgb(0 0 0 / 40%)",
+    display: "flex",
+    justifyContent: "center",
+    width: "360px",
+    padding: "7px",
+    border: "none",
+  },
+  cardImg: {
+    width: "100%",
+    height: "262px",
+    objectFit: "cover",
+    borderRadius: "12px",
+    // boxShadow: "0px 2px 10px rgb(0 0 0 / 40%)",
+  },
+  cardContent: {
+    textAlign: "center", // Center align text content
+    padding: theme.spacing(2),
+  },
+}));
+
+const Card2 = ({ cardData }) => {
   const classes = useStyles();
+
   return (
-    <Card sx={{ mt: 5, width: "100%", boxShadow: "none" }}>
-      <Box
-        sx={{
-          marginRight: "20px",
-        }}
-      >
+    <Card
+      className={classes.card}
+      sx={{ boxShadow: "0px 2px 10px rgb(0 0 0 / 40%)" }}
+    >
+      <Box>
         <CardMedia
+          component="img"
           image={cardData.bgImg}
           title="green iguana"
           className={classes.cardImg}
         />
-        <CardContent className={classes.cardcontent}>
+        <CardContent className={classes.cardContent}>
           <Typography variant="h5">{cardData.title}</Typography>
           <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
             {cardData.description}
@@ -30,25 +53,6 @@ export default function Card2({ cardData }) {
       </Box>
     </Card>
   );
-}
+};
 
-const useStyles = makeStyles((theme) => ({
-  cardImg: {
-    margin: "auto",
-    marginTop: "18px",
-    marginBottom: "0px",
-    borderRadius: "12px",
-    width: "100%",
-    height: "262px",
-  },
-  cardcontent: {
-    borderRadius: "12px",
-    margin: "0px 0px",
-    color: "black",
-    width: "-webkit-fill-available",
-    height: "117px",
-    marginBottom: "10px",
-    boxShadow:
-      "0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)",
-  },
-}));
+export default Card2;
