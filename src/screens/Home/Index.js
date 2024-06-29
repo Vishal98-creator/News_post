@@ -209,7 +209,7 @@ const Index = () => {
       limit: 50,
       offset: 0,
       filters: {
-        flag: "", //popular, tranding, featured
+        // flag: "", //popular, tranding, featured
         postType: "video", //image. video
       },
     };
@@ -241,7 +241,7 @@ const Index = () => {
       limit: 50,
       offset: 0,
       filters: {
-        flag: "tranding", //popular, tranding, featured
+        flag: "trending", //popular, tranding, featured
         postType: "image", //image. video
       },
     };
@@ -273,7 +273,7 @@ const Index = () => {
       limit: 50,
       offset: 0,
       filters: {
-        flag: "tranding", //popular, tranding, featured
+        flag: "trending", //popular, tranding, featured
         postType: "video", //image. video
       },
     };
@@ -326,7 +326,7 @@ const Index = () => {
           cardData={topCardData?.length > 0 ? topCardData : []}
         />
         <LatestVideos
-          title="Tranding Videos"
+          title="Trending Videos"
           cardData={trandingVideos?.length > 0 ? trandingVideos : []}
         />
         <Popularposts

@@ -20,7 +20,7 @@ function LatestVideos({ cardData }) {
   const isLargeScreen = useMediaQuery("(min-width:1420px)");
   const isMediumScreen = useMediaQuery("(max-width:970px)");
   console.log("the video data inside latest video ======>>>>",cardData);
-  const url1 = cardData[0].mainVideo;
+  const url1 = cardData[0]?.mainVideo;
   // const slicedCardData = cardData.slice(1);
   const settings = {
     className: "slider variable-width",
