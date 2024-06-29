@@ -35,9 +35,11 @@ const Index = () => {
   console.log("popularImages: ", popularImages);
   const [newPostImages, setNewPostImages] = useState([]);
   const [latestVideo, setLatestVideo] = useState([]);
+  console.log('latestVideo: ', latestVideo);
   const [teandingImages, setTrandingImages] = useState([]);
   const [trandingVideos, setTrandingVideos] = useState([]);
   const [topCardData, setTopCardData] = useState([]);
+  console.log('topCardData: ', topCardData);
 
   useEffect(() => {
     getData();
@@ -72,11 +74,18 @@ const Index = () => {
         const formattedData =
           response?.data?.posts?.length > 0
             ? response?.data?.posts.map((item) => {
-                return {
-                  bgImg: item?.mainImage || blackbgcar,
-                  title: item?.title || "Заглавие на новина",
-                  description: "Началото на статията....",
-                };
+              return {
+                id: item?._id || "",
+                content: item?.content || '',
+                images: item?.images || [],
+                videos: item?.videos || [],
+                bgImg: item?.mainImage || blackbgcar, 
+                title: item?.title || "Заглавие на новина", 
+                description: "Началото на статията...." ,
+                postType: item?.postType,
+                mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
+              }
+                
               })
             : [];
         setPopularImages(formattedData);
@@ -106,10 +115,16 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            bgImg: item?.mainImage || blackbgcar,
-            title: item?.title || "Заглавие на новина",
-            description: "Началото на статията....",
-          };
+            id: item?._id || "",
+            content: item?.content || '',
+            images: item?.images || [],
+            videos: item?.videos || [],
+            bgImg: item?.mainImage || blackbgcar, 
+            title: item?.title || "Заглавие на новина", 
+            description: "Началото на статията...." ,
+            postType: item?.postType,
+            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
+          }
         });
         setNewPostImages(formattedData);
         setTopCardData(formattedData);
@@ -139,10 +154,16 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            bgImg: item?.mainImage || blackbgcar,
-            title: item?.title || "Заглавие на новина",
-            description: "Началото на статията....",
-          };
+            id: item?._id || "",
+            content: item?.content || '',
+            images: item?.images || [],
+            videos: item?.videos || [],
+            bgImg: item?.mainImage || blackbgcar, 
+            title: item?.title || "Заглавие на новина", 
+            description: "Началото на статията...." ,
+            postType: item?.postType,
+            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
+          }
         });
         setLatestVideo(formattedData);
       } else {
@@ -171,10 +192,16 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            bgImg: item?.mainImage || blackbgcar,
-            title: item?.title || "Заглавие на новина",
-            description: "Началото на статията....",
-          };
+            id: item?._id || "",
+            content: item?.content || '',
+            images: item?.images || [],
+            videos: item?.videos || [],
+            bgImg: item?.mainImage || blackbgcar, 
+            title: item?.title || "Заглавие на новина", 
+            description: "Началото на статията...." ,
+            postType: item?.postType,
+            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
+          }
         });
         setTrandingImages(formattedData);
       } else {
@@ -203,10 +230,16 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            bgImg: item?.mainImage || blackbgcar,
-            title: item?.title || "Заглавие на новина",
-            description: "Началото на статията....",
-          };
+            id: item?._id || "",
+            content: item?.content || '',
+            images: item?.images || [],
+            videos: item?.videos || [],
+            bgImg: item?.mainImage || blackbgcar, 
+            title: item?.title || "Заглавие на новина", 
+            description: "Началото на статията...." ,
+            postType: item?.postType,
+            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
+          }
         });
         setTrandingVideos(formattedData);
       } else {
@@ -223,7 +256,7 @@ const Index = () => {
         <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
         <TopView
-          cardData={topCardData.length == 0 ? topCardData : []}
+          cardData={topCardData.length > 0 ? topCardData : []}
         />
         <Popularposts
           title="Popular Images"
@@ -244,7 +277,7 @@ const Index = () => {
         />
         <LatestVideos
           title="Trending Videos"
-          cardData={trandingVideos?.length > 0 ? trandingVideos : []}
+          cardData={latestVideo?.length > 0 ? latestVideo : []}
         />
         <Popularposts
           title="Top Posts"
