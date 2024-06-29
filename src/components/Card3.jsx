@@ -22,9 +22,9 @@ export default function Card3({ cardData }) {
         className={classes.cardcontent}
         onClick={() => navigate(`/view-post/${cardData.id}`)}
       >
-        <Typography variant="h5">{cardData.title}</Typography>
+        <Typography variant="h5">{cardData?.title}</Typography>
         <Typography variant="body2" sx={{ mt: 2, color: COLORS.lightGray }}>
-          {cardData.description}
+          {cardData?.description}
         </Typography>
       </CardContent>
     </Card>
