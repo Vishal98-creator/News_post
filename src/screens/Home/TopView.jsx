@@ -11,7 +11,9 @@ const cardDataArray = [
 ];
 const TopView = (props) => {
   const { cardData } = props;
- 
+
+ console.log("the cardata inside top view ====>>",cardData)
+ console.log("the cardata length ====>>",cardData.length)
   return (
     <Grid container spacing={2}>
       <Grid
@@ -24,6 +26,7 @@ const TopView = (props) => {
       >
         <Card1 cardData={cardData[0]} />
       </Grid>
+      {cardData.length >1 ?
       <Grid
         item
         xs={12}
@@ -34,6 +37,8 @@ const TopView = (props) => {
       >
         <Card1 cardData={cardData[1]} />
       </Grid>
+: ""} 
+{cardData.length> 2 ?
       <Grid
         item
         xs={12}
@@ -43,9 +48,11 @@ const TopView = (props) => {
         justifyContent={"center"}
       >
         {/* <Card1 cardData={cardData[0]}/> */}
-        {/* <CardSlider cardDataArray={cardData.slice(2)} /> */}
-        <CardSlider/>
+        <CardSlider cardDataArray={cardData.length>2 ?cardData.slice(2): cardDataArray} />
+        {/* <CardSlider cardDataArray={dataCard}/> */}
+        {/* <CardSlider cardDataArray={cardDataArray}/> */}
       </Grid>
+: ""}
     </Grid>
   );
 };

@@ -104,7 +104,7 @@ const newsPostCard = [
 ];
 
 const Index = () => {
-  const [topCardData, setTopCardData] = useState([]);
+  const [topCardData, setTopCardData] = useState(TopViewCardData);
   console.log("The card data is:- ",topCardData);
   useEffect(()=> {
        getCall();
@@ -119,15 +119,22 @@ const Index = () => {
     }
     try{
       const response = await apiCall('POST', apiEndPoints.GETPOSTLIST,JSON.stringify(data))
-      const formattedData = response?.data?.posts.map((item)=> {
-        return {
-          bgImg: item?.mainImage || blackbgcar, 
-          title: item?.title || "Заглавие на новина", 
-          description: "Началото на статията...." 
-        }
-      })
-      setTopCardData(formattedData);
-      console.log("The response is :- ", response?.data?.posts);
+      //  console.log('The length of response is :- ', response?.data?.posts.length);
+       if(response) {
+        console.log('The response is getting =====>');
+        const formattedData = response?.data?.posts.map((item)=> {
+          return {
+            bgImg: item?.mainImage || blackbgcar, 
+            title: item?.title || "Заглавие на новина", 
+            description: "Началото на статията...." 
+          }
+        })
+         console.log("The response is :- ", response?.data?.posts);
+        setTopCardData(formattedData);
+       }else{
+          setTopCardData(TopViewCardData)
+       }
+     
     }catch(error){
       console.error('GETPOSTLIST error :- ', error);
     }
@@ -137,15 +144,16 @@ const Index = () => {
       <Grid display={"flex"} flexDirection={"column"}>
         <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
-        {/* <TopView cardData={TopViewCardData}/> */}
+        {/* <TopView cardData={topCardData}/> */}
         <TopView cardData={topCardData.length!==0 ? topCardData:TopViewCardData} />
-        <Popularposts cardData={PopularPostCardData} />
+        {/* <Popularposts cardData={PopularPostCardData}/> */}
+        <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
         <SportWidget />
-        <NewsPost cardData={newsPostCard} />
+        <NewsPost cardData={topCardData.length!==0 ? topCardData:newsPostCard} />
         <LatestVideos cardData={newsPostCard} />
-        <Popularposts cardData={PopularPostCardData} />
+        <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
         <LatestVideos cardData={newsPostCard} />
-        <Popularposts cardData={PopularPostCardData} />
+        <Popularposts cardData={topCardData.length!==0 ? topCardData:PopularPostCardData} />
       </Grid>
     </>
   );

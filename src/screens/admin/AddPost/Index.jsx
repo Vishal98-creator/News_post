@@ -29,7 +29,7 @@ const AddPost = () => {
       formData.append("content", value);
       formData.append("postType", postType);
       formData.append("mainImage", file);
-      // formData.append("tags", []);
+      formData.append("tags", JSON.stringify(["#test"]));
       try {
         const response = await apiCall("POST", apiEndPoints.ADDPOST, formData, {
           headers: { "Content-Type": "multipart/form-data" },
