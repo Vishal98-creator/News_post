@@ -103,18 +103,16 @@ const newsPostCard = [
 const Index = () => {
   return (
     <>
-      <Grid display={"flex"} flexDirection={"column"}>
-        <Header />
-        <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
-        <TopView cardData={TopViewCardData} />
-        <Popularposts cardData={PopularPostCardData} />
-        <SportWidget />
-        <NewsPost cardData={newsPostCard} />
-        <LatestVideos cardData={newsPostCard} />
-        <Popularposts cardData={PopularPostCardData} />
-        <LatestVideos cardData={newsPostCard} />
-        <Popularposts cardData={PopularPostCardData} />
-      </Grid>
+      <Header />
+      <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
+      <TopView cardData={TopViewCardData} />
+      <Popularposts cardData={PopularPostCardData} />
+      <SportWidget />
+      <NewsPost cardData={newsPostCard} />
+      <LatestVideos cardData={newsPostCard} />
+      <Popularposts cardData={PopularPostCardData} />
+      <LatestVideos cardData={newsPostCard} />
+      <Popularposts cardData={PopularPostCardData} />
     </>
   );
 };

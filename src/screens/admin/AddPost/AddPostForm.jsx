@@ -7,6 +7,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import TextEditor from "../../../components/TextEditor";
 import { COLORS } from "../../../constants";
+import ReactPlayer from 'react-player';
 
 const AddPostForm = ({
   postType = 1,
@@ -18,6 +19,12 @@ const AddPostForm = ({
   titile,
   setTitile,
   handlePublic,
+  handleImageGallery,
+  setYouTubeUrls,
+  tagText,
+  setTagText,
+  tags,
+  setTags,
 }) => {
   // postType = 1 ? 'Send post :'Send Video'
   const classes = useStyles();
@@ -43,6 +50,8 @@ const AddPostForm = ({
                     size="small"
                     fullWidth
                     sx={{ backgroundColor: "#F5F5F5", paddingRight: "50px" }}
+                    onChange={(e) => setTagText(e.target.value)}
+                    value={tagText}
                   />
                   <Button
                     sx={{
@@ -52,25 +61,66 @@ const AddPostForm = ({
                       top: 1,
                     }}
                   >
-                    <Add sx={{ height: "26px" }} />
+                    <Add
+                      sx={{ height: "26px" }}
+                      onClick={() => {
+                        setTags([...tags, tagText], setTagText(""));
+                      }}
+                    />
                   </Button>
                 </Box>
               </Box>
             </Box>
+            {postType === "video" && (
+              <Box sx={{ width: "100%", mt: 3 }}>
+                <Box>Enter Video url</Box>
+                <Box sx={{ position: "relative" }}>
+                  <OutlinedInput
+                    size="small"
+                    fullWidth
+                    sx={{ backgroundColor: "#F5F5F5", paddingRight: "50px" }}
+                    onChange={(e) => setYouTubeUrls(e.target.value)}
+                  />
+                  {/* <Button
+                  sx={{
+                    backgroundColor: "rgba(220, 220, 220, 1)",
+                    position: "absolute",
+                    right: 1,
+                    top: 1,
+                  }}
+                >
+                  <Add sx={{ height: "26px" }} />
+                </Button> */}
+                </Box>
+              </Box>
+            )}
             <Box sx={{ mt: 5 }}>
               <Box>Explanation</Box>
               <TextEditor value={value} setValue={setValue} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
-            <Box sx={{ marginLeft: 2, width: "100%" }}>
-              <Box>Add image</Box>
-              <FileUploader
-                handleChange={handleChange}
-                name="file"
-                types={["JPG", "PNG", "GIF"]}
-              />
-            </Box>
+            {postType === "image" ? (
+              <Box sx={{ marginLeft: 2, width: "100%" }}>
+                <Box>Add image</Box>
+                <FileUploader
+                  handleChange={handleChange}
+                  name="file"
+                  mu
+                  types={["JPG", "PNG", "GIF"]}
+                />
+              </Box>
+            ) : (
+              <Box sx={{ marginLeft: 2, width: "100%" }}>
+                <Box>Image Gallery</Box>
+                <FileUploader
+                  handleChange={handleImageGallery}
+                  name="file"
+                  types={["JPG", "PNG", "GIF"]}
+                  multiple
+                />
+              </Box>
+            )}
             <Box display={"flex"} justifyContent={"end"}>
               <Button
                 onClick={handlePublic}

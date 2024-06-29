@@ -8,8 +8,13 @@ import Card3 from "../../components/Card3";
 import { Box, Button, useMediaQuery } from "@mui/material";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { COLORS } from "../../constants";
+import ReactPlayer from "react-player";
+import VideoCard from "../../components/VideoCard";
+import { useNavigate } from "react-router-dom";
+import VideoCard3 from "../../components/VideoCard2";
 
 function LatestVideos({ cardData }) {
+  const navigate = useNavigate();
   const sliderRef = useRef(null);
   const classes = useStyles();
   const isLargeScreen = useMediaQuery("(min-width:1420px)");
@@ -69,7 +74,12 @@ function LatestVideos({ cardData }) {
       {!isMediumScreen ? (
         <Slider ref={sliderRef} {...settings}>
           <div style={{ width: 700 }}>
-            <Card1 cardData={cardData[0]} />
+            <VideoCard
+              height={"450px"}
+              width={"100%"}
+              showTitleBar
+              navigate={navigate}
+            />
           </div>
           <div
             style={{ width: 400, marginTop: "0px" }}
@@ -77,6 +87,8 @@ function LatestVideos({ cardData }) {
           >
             <Card3 cardData={cardData[1]} />
             <Card3 cardData={cardData[2]} />
+            {/* <VideoCard3 cardData={cardData[2]} navigate={navigate} />
+            <VideoCard3 cardData={cardData[2]} navigate={navigate} /> */}
           </div>
           <div style={{ width: 400 }} className="c-small-card-react-slick">
             <Card3 cardData={cardData[3]} />
