@@ -7,6 +7,7 @@ import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 import VideoCard from "./VideoCard";
 import { Box } from "@mui/material";
+import { trimTitle } from "../utils/helperFunctios";
 
 export default function VideoCard3({ cardData, navigate, videoUrl }) {
   const classes = useStyles();
@@ -21,7 +22,7 @@ export default function VideoCard3({ cardData, navigate, videoUrl }) {
         <Box className={classes.title}
          onClick={() => navigate(`/view-post/${cardData._id}`)}
         >
-          {cardData.title}
+          {trimTitle(cardData?.title, 120)}
         </Box>
         <Typography variant="body2" className={classes.description}>
           Preview..

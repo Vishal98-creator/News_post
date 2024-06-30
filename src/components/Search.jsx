@@ -114,7 +114,7 @@ export default function CustomSearchInput() {
      </SearhWrapper>
    </SearchBox>
     {/* {console.log("The (((((((((((",searchResults.length)} */}
-    {searchResults.length> 0? 
+    {searchResults?.length> 0? 
    <FilteredSearch cardData={searchResults} title="Search Results"/>  : ""} 
    
    </Box>

@@ -6,6 +6,10 @@ import theme from "./theme";
 import Footer from "./components/Footer";
 import Router from "./Router";
 import { ToastContainer } from "react-toastify";
+import moment from "moment";
+
+moment.locale('bg');
+
 
 function App() {
   return (

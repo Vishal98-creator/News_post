@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import { Box, Grid } from "@mui/material";
 import { COLORS } from "../constants";
 import { makeStyles } from "@mui/styles";
@@ -8,19 +8,36 @@ import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import { useNavigate } from "react-router-dom";
 import VideoCard from "./VideoCard";
+import {trimTitle} from "../utils/helperFunctios";
 // import Card3 from "../../components/Card3";
 
 const FilteredSearch = ({ cardData, title }) => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const search_input = useRef(null);
+  useEffect(() => {
+   function handleClickOutside(event) {
+     if (search_input.current && !search_input.current.contains(event.target)) {
+      //  setSearchResults([]);
+     }
+   }
+   document.addEventListener("mousedown", handleClickOutside);
+   return () => {
+     document.removeEventListener("mousedown", handleClickOutside);
+   };
+ }, [search_input]);
   return (
     <Box
+    ref={search_input}
       sx={{
         mt: 2,
         maxHeight: "400px",
         overflowY: "auto",
         position: "absolute",
         zIndex: 100,
+        '&::-webkit-scrollbar': {
+             display: 'none'
+        }
       }}
       className={classes.newsPostContainer}
     >
@@ -36,9 +53,8 @@ const FilteredSearch = ({ cardData, title }) => {
             console.log("This is running inside images :----")
             return (
               <Grid key={i} item xs={12}>
-                {/* <Card3 cardData={card} /> */}
                 <Card
-                  sx={{ mt: 0, width: "100%", display: "flex", height: "65px" }}
+                  sx={{ mt: 0, width: "100%", display: "flex", height: "65px"}}
                 >
                   <CardMedia
                     image={card?.mainImage}
@@ -49,13 +65,13 @@ const FilteredSearch = ({ cardData, title }) => {
                     className={classes.cardcontent}
                     onClick={() => navigate(`/view-post/${card?._id}`)}
                   >
-                    <Typography>{card?.title}</Typography>
+                    <Typography>{trimTitle(card?.title)}</Typography>
                     <Typography
                       variant="body2"
-                      sx={{ mt: 2, color: COLORS.lightGray }}
+                      sx={{ mt: 0, color: COLORS.lightGray }}
                     >
                       {/* {cardData?.description} */}
-                      {/* Началото на статията.... */}
+                      Началото на статията....
                     </Typography>
                   </CardContent>
                 </Card>
@@ -64,7 +80,9 @@ const FilteredSearch = ({ cardData, title }) => {
           } else if (card?.postType === "video") {
             return (
               <Grid key={i} item xs={12}>
-                <Card className={classes.card}>
+                <Card 
+                className={classes.card}
+                >
                   <CardMedia className={classes.media}>
                     <VideoCard
                       height={"100%"}
@@ -73,9 +91,9 @@ const FilteredSearch = ({ cardData, title }) => {
                       videoUrl={card?.mainVideo}
                     />
                   </CardMedia>
-                  <CardContent className={classes.content}>
+                  <CardContent className={classes.content}  onClick={() => navigate(`/view-post/${card?._id}`)}>
                     <Typography className={classes.title}>
-                      {card?.title}
+                      {trimTitle(card?.title)}
                     </Typography>
                     <Typography variant="body2" className={classes.description}>
                       Preview..
@@ -109,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "20px",
   },
   cardImg: {
-    margin: "10px",
+    margin: "8px",
     borderRadius: "12px",
     width: "100px",
     height: "50px",
@@ -120,7 +138,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "12px",
     margin: "0px 0px",
     color: "black",
-    height: "117px",
+    height: "100px",
+    marginRight: '6px',
+    // padding: '5px'
   },
   card: {
     display: "flex",
@@ -129,36 +149,40 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     // border: "1px solid #e0e0e0",
     width: "100%",
-    height: "50px",
-    paddingTop: '10px',
+    height: "52px",
+    paddingTop: '11px',
+    paddingBottom: '5px',
     // marginTop: '5px'
-    // backgroundColor: 'blue'
-   
+    // backgroundColor: 'red'
   },
   media: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: "31%",
+    width: "30%",
     height: "100%",
     borderRadius: "12px 12px 12px 12px",
     overflow: "hidden",
     marginBottom: '8px',
-    marginLeft: '10px',
+    marginLeft: '8px',
     // backgroundColor: 'red',
     paddingTop: "1px "
     // paddingBottom: "15px"
   },
   content: {
-    // backgroundColor: 'red',
-    padding: "16px",
+    // backgroundColor: 'blue',
+     cursor: "pointer",
+    paddingTop: "5px",
     width: "50%",
-    height: '100%'
+    height: '100%',
+    marginLeft: '10px',
+    marginTop: '15px'
   },
   title: {
     fontSize: "1.25rem",
     fontWeight: 600,
+    // marginLeft: '10px'
   },
   description: {
     color: COLORS.lightGray,

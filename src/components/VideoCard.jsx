@@ -3,6 +3,7 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { COLORS } from "../constants";
 import { makeStyles } from "@mui/styles";
+import { trimTitle } from "../utils/helperFunctios";
 
 const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl, cardData }) => {
   console.log('cardData: ====>>> ', cardData);
@@ -38,7 +39,7 @@ const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl, cardData }
       </div>
       {showTitleBar && cardData.length > 0 && (
         <Box className={classes.cardcontent}>
-          <Typography variant="h5">{cardData[0]?.title}</Typography>
+          <Typography variant="h5">{trimTitle(cardData[0]?.title,150)}</Typography>
           <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
             Началото на статията....
           </Typography>
