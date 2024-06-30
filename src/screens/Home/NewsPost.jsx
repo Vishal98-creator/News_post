@@ -4,12 +4,14 @@ import React from "react";
 import { COLORS } from "../../constants";
 import { makeStyles } from "@mui/styles";
 import Card3 from "../../components/Card3";
+import { useNavigate } from "react-router-dom";
 
 const NewsPost = ({ cardData, title }) => {
+  const navigate = useNavigate()
   const classes = useStyles();
   return (
     <>
-      <Box sx={{ mt: 5 }}>
+      <Box sx={{ mt: 5, }}>
         <Box display={"flex"} justifyContent={"space-between"}>
           <Box varient="h4" className={classes.sectionTitle}>
             {title}
@@ -32,7 +34,7 @@ const NewsPost = ({ cardData, title }) => {
                 md={6}
                 display={"flex"}
                 justifyContent={"center"}
-                sx={{ boxShadow: "rgba(0, 0, 0, 0.07)" }}
+                // sx={{ boxShadow: "rgba(0, 0, 0, 0.07)" }}
               >
                 <Card3 cardData={card} />
               </Grid>

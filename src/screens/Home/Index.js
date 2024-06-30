@@ -14,7 +14,7 @@ import crossImges from "../../assets/images/crossImges.png";
 import musicalMan from "../../assets/images/musicalMan.png";
 import Popularposts from "./Popularposts";
 import SportWidget from "./SportWidget";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import NewsPost from "./NewsPost";
 import CategorySlider from "../../components/CategorySlider";
 import { TOP_CATEGORIES } from "../../constants";
@@ -38,6 +38,7 @@ const Index = () => {
   console.log('latestVideo: ', latestVideo);
   const [teandingImages, setTrandingImages] = useState([]);
   const [trandingVideos, setTrandingVideos] = useState([]);
+  console.log('trandingVideos: ', trandingVideos);
   const [topCardData, setTopCardData] = useState([]);
   console.log('topCardData: ', topCardData);
 
@@ -74,18 +75,11 @@ const Index = () => {
         const formattedData =
           response?.data?.posts?.length > 0
             ? response?.data?.posts.map((item) => {
-              return {
-                id: item?._id || "",
-                content: item?.content || '',
-                images: item?.images || [],
-                videos: item?.videos || [],
-                bgImg: item?.mainImage || blackbgcar, 
-                title: item?.title || "Заглавие на новина", 
-                description: "Началото на статията...." ,
-                postType: item?.postType,
-                mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-              }
-                
+                return {
+                  ...item, 
+                  bgImg: item?.mainImage || blackbgcar,
+                  description: "Началото на статията....",
+                };
               })
             : [];
         setPopularImages(formattedData);
@@ -115,16 +109,10 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            id: item?._id || "",
-            content: item?.content || '',
-            images: item?.images || [],
-            videos: item?.videos || [],
-            bgImg: item?.mainImage || blackbgcar, 
-            title: item?.title || "Заглавие на новина", 
-            description: "Началото на статията...." ,
-            postType: item?.postType,
-            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-          }
+            ...item, 
+            bgImg: item?.mainImage || blackbgcar,
+            description: "Началото на статията....",
+          };
         });
         setNewPostImages(formattedData);
         setTopCardData(formattedData);
@@ -154,18 +142,12 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            id: item?._id || "",
-            content: item?.content || '',
-            images: item?.images || [],
-            videos: item?.videos || [],
-            bgImg: item?.mainImage || blackbgcar, 
-            title: item?.title || "Заглавие на новина", 
-            description: "Началото на статията...." ,
-            postType: item?.postType,
-            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-          }
+            ...item, 
+            bgImg: item?.mainImage || blackbgcar,
+            description: "Началото на статията....",
+          };
         });
-        setLatestVideo(formattedData);
+        setLatestVideo(response?.data?.posts);
       } else {
         // setTrandingVideos(TopViewCardData);
       }
@@ -192,16 +174,10 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            id: item?._id || "",
-            content: item?.content || '',
-            images: item?.images || [],
-            videos: item?.videos || [],
-            bgImg: item?.mainImage || blackbgcar, 
-            title: item?.title || "Заглавие на новина", 
-            description: "Началото на статията...." ,
-            postType: item?.postType,
-            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-          }
+            ...item, 
+            bgImg: item?.mainImage || blackbgcar,
+            description: "Началото на статията....",
+          };
         });
         setTrandingImages(formattedData);
       } else {
@@ -230,16 +206,10 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            id: item?._id || "",
-            content: item?.content || '',
-            images: item?.images || [],
-            videos: item?.videos || [],
-            bgImg: item?.mainImage || blackbgcar, 
-            title: item?.title || "Заглавие на новина", 
-            description: "Началото на статията...." ,
-            postType: item?.postType,
-            mainVideo: item?.mainVideo || "https://www.youtube.com/watch?v=UluB8Rg_AQA"
-          }
+            ...item, 
+            bgImg: item?.mainImage || blackbgcar,
+            description: "Началото на статията....",
+          };
         });
         setTrandingVideos(formattedData);
       } else {
@@ -252,7 +222,7 @@ const Index = () => {
 
   return (
     <>
-      <Grid display={"flex"} flexDirection={"column"}>
+      <Box>
         <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
         <TopView
@@ -260,7 +230,7 @@ const Index = () => {
         />
         <Popularposts
           title="Popular Images"
-          cardData={popularImages.length !== 0 ? popularImages : []}
+          cardData={topCardData.length !== 0 ? topCardData : []}
         />
         <SportWidget />
         <NewsPost
@@ -277,13 +247,13 @@ const Index = () => {
         />
         <LatestVideos
           title="Trending Videos"
-          cardData={latestVideo?.length > 0 ? latestVideo : []}
+          cardData={trandingVideos?.length > 0 ? trandingVideos : []}
         />
         <Popularposts
           title="Top Posts"
           cardData={topCardData?.length > 0 ? topCardData : []}
         />
-      </Grid>
+      </Box>
     </>
   );
 };

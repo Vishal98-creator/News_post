@@ -72,13 +72,19 @@ p {
   margin-top: 0;
   margin-bottom: 1rem;
 }
-
+/* 
 .slick-slide {
   margin-right: 20px !important;
 }
 .view-post-slider-conteainer .slick-slide {
   margin-right: 0px !important;
-}
-.c-small-card-react-slick div {
+} */
+/* .c-small-card-react-slick div {
   margin-top: 10px !important;
+}
+.slider-container .slick-track{
+  width: 100% !important;
+} */
+.slick-prev:before, .slick-next:before{
+  color:#787474 !important ;
 }

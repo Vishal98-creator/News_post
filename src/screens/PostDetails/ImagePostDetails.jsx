@@ -48,7 +48,7 @@ const ImagePostDetails = ({htmlContent}) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
           <Box className={classes.mainImgContainer}>
-            <Box sx={{fontSize:'12x', fontWeight:600}}>Images</Box>
+            <Box sx={{fontSize:'12x', fontWeight:600}}>Image Gallery</Box>
             <ImageSlider/>
           </Box>
           </Grid>

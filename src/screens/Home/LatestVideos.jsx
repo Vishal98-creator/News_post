@@ -1,116 +1,11 @@
-import React, { useRef } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Card1 from "../../components/Card1";
-import { makeStyles } from "@mui/styles";
-import Card3 from "../../components/Card3";
-import { Box, Button, useMediaQuery } from "@mui/material";
+import React, { useRef, useState } from "react";
+import { Box, Button, useMediaQuery, Typography } from "@mui/material";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { COLORS } from "../../constants";
-import ReactPlayer from "react-player";
 import VideoCard from "../../components/VideoCard";
-import { useNavigate } from "react-router-dom";
 import VideoCard3 from "../../components/VideoCard2";
-
-function LatestVideos({ cardData }) {
-  const navigate = useNavigate();
-  const sliderRef = useRef(null);
-  const classes = useStyles();
-  const isLargeScreen = useMediaQuery("(min-width:1420px)");
-  const isMediumScreen = useMediaQuery("(max-width:970px)");
-  console.log("the video data inside latest video ======>>>>",cardData);
-  const url1 = cardData[0]?.mainVideo;
-  // const slicedCardData = cardData.slice(1);
-  const settings = {
-    className: "slider variable-width",
-    // dots: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    variableWidth: true,
-    infinite: true,
-    responsive: [
-      {
-        breakpoint: 1420,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-    ],
-  };
-  const renderRows = (data) => {
-    const rows = [];
-    for (let i = 0; i < data.length; i += 2) {
-      rows.push(
-        <div key={i} style={{ display: "flex", marginBottom: "10px" }}>
-          <VideoCard3 cardData={data[i]} navigate={navigate} videoUrl={data[i]?.mainVideo || url1} />
-          {data[i + 1] && (
-            <VideoCard3 cardData={data[i + 1]} navigate={navigate} videoUrl={data[i + 1]?.mainVideo || url1} />
-          )}
-        </div>
-      );
-    }
-    return rows;
-  };
-  return (
-    <Box className={classes.sliderContainer} sx={{ mt: 8 }}>
-      <Box display={"flex"} justifyContent={"space-between"}>
-        <Box varient="h4" className={classes.sectionTitle}>
-          Популярни
-        </Box>
-        <Box>
-          <Button onClick={() => sliderRef.current.slickPrev()}>
-            <NavigateBefore />
-          </Button>
-          <Button
-            onClick={() => sliderRef.current.slickNext()}
-            sx={{ marginLeft: 2 }}
-          >
-            <NavigateNext />
-          </Button>
-        </Box>
-      </Box>
-      {!isMediumScreen ? (
-        <Slider ref={sliderRef} {...settings}>
-          <div style={{ width: 700 }}>
-            <VideoCard
-              height={"450px"}
-              width={"100%"}
-              showTitleBar
-              navigate={navigate}
-              videoUrl={url1} 
-              cardData={cardData}
-            />
-          </div>
-         
-          {renderRows(cardData.slice(1))}
-        </Slider>
-      ) : (
-        ""
-      )}
-    </Box>
-  );
-}
-
-export default LatestVideos;
+import { makeStyles } from "@mui/styles";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   sectionTitle: {
@@ -119,12 +14,173 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "10px",
     fontWeight: 500,
     fontSize: "20px",
-    marginBottom: "50px",
+    marginBottom: "21px",
   },
-  sliderContainer: {
-    width: "100%",
-    marginTop: "20px",
-    background: "rgba(245, 245, 245, 1)",
-    padding: "20px 20px",
+  noSelect: {
+    userSelect: "none",
+    WebkitUserSelect: "none",
+    MozUserSelect: "none",
+    MsUserSelect: "none",
+  },
+  hideScrollbar: {
+    scrollbarWidth: 'none', /* Firefox */
+    msOverflowStyle: 'none',  /* Internet Explorer 10+ */
+    '&::-webkit-scrollbar': {
+      display: 'none', /* Safari and Chrome */
+    },
+  },
+  container: {
+    display: 'flex',
+    overflowX: 'auto',
+    whiteSpace: 'nowrap',
+    padding: '8px 0',  // Adjust padding to your needs
+    cursor: 'grab',
+    [theme.breakpoints.down('sm')]: {
+      padding: '4px 0',  // Less padding on smaller screens
+    },
+  },
+  videoCardLarge: {
+    flex: '0 0 auto',
+    marginRight: '16px',
+    width: '600px', // Adjust width to fit in smaller screens
+    boxSizing: 'border-box',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%', // Adjust width for small screens
+      marginRight: '8px',
+    },
+  },
+  videoCardSmall: {
+    flex: '0 0 auto',
+    marginRight: '16px',
+    width: '430px', // Adjust width to fit in smaller screens
+    boxSizing: 'border-box',
+    [theme.breakpoints.down('sm')]: {
+      width: '444px', // Adjust width for small screens
+      marginRight: '8px',
+      
+    },
   },
 }));
+
+function LatestVideos({ cardData }) {
+console.log('cardData: vv', cardData);
+  const navigate = useNavigate();
+  const classes = useStyles();
+  const containerRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const isMediumScreen = useMediaQuery("(max-width:970px)");
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+    document.body.style.cursor = 'grabbing'; // Change cursor to grabbing
+    document.body.classList.add(classes.noSelect); // Disable text selection
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+    document.body.style.cursor = 'default'; // Reset cursor
+    document.body.classList.remove(classes.noSelect); // Enable text selection
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    document.body.style.cursor = 'default'; // Reset cursor
+    document.body.classList.remove(classes.noSelect); // Enable text selection
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust scrolling speed
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+    document.body.classList.add(classes.noSelect); // Disable text selection
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    document.body.classList.remove(classes.noSelect); // Enable text selection
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust scrolling speed
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const renderRows = (data) => {
+    const rows = [];
+    for (let i = 0; i < data.length; i += 2) {
+      rows.push(
+        <Box key={i} display="flex" flexDirection="column" alignItems="center" justifyContent={'space-between'}>
+          <Box className={classes.videoCardSmall}>
+            <VideoCard3 cardData={data[i]} navigate={navigate} videoUrl={data[i]?.mainVideo} />
+          </Box>
+          {data[i + 1] && (
+            <Box className={classes.videoCardSmall} mt={2}>
+              <VideoCard3 cardData={data[i + 1]} navigate={navigate} videoUrl={data[i + 1]?.mainVideo} />
+            </Box>
+          )}
+        </Box>
+      );
+    }
+    return rows;
+  };
+
+  return (
+    <Box sx={{ mt: 8, minHeight: "100%", display: 'flex', flexDirection: 'column' }}>
+      <Box display={"flex"} justifyContent={"space-between"}>
+        <Box varient="h4" className={classes.sectionTitle}>
+          Популярни
+        </Box>
+        <Box>
+          <Button onClick={() => containerRef.current.scrollLeft -= 360}>
+            <NavigateBefore />
+          </Button>
+          <Button
+            onClick={() => containerRef.current.scrollLeft += 360}
+            sx={{ marginLeft: 2 }}
+          >
+            <NavigateNext />
+          </Button>
+        </Box>
+      </Box>
+      <Box
+        ref={containerRef}
+        className={`${classes.hideScrollbar} ${classes.container}`}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
+      >
+        <Box className={classes.videoCardLarge}>
+          <VideoCard
+            height={"450px"}
+            width={"100%"}
+            showTitleBar
+            navigate={navigate}
+            videoUrl={cardData[0]?.mainVideo} 
+            cardData={cardData}
+          />
+        </Box>
+        {renderRows(cardData.slice(1))}
+      </Box>
+    </Box>
+  );
+}
+
+export default LatestVideos;
