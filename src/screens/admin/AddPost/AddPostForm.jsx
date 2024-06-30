@@ -16,11 +16,10 @@ import Select from "@mui/material/Select";
 const AddPostForm = ({
   postType = 1,
   file,
-  setFile,
   handleChange,
   value,
   setValue,
-  titile,
+  title,
   setTitile,
   handlePublic,
   handleImageGallery,
@@ -30,13 +29,10 @@ const AddPostForm = ({
   tags,
   setTags,
   images,
-  setImages,
   handleFlagTypeChange,
   handleImageDelete,
   flagType,
 }) => {
-  // postType = 1 ? 'Send post :'Send Video'
-  const classes = useStyles();
   return (
     <>
       <Box>
@@ -44,12 +40,24 @@ const AddPostForm = ({
           <Grid item xs={12} sm={12} md={8}>
             <Box display={"flex"} alignItems={"center"} fullWidth>
               <Box sx={{ width: "100%" }}>
-                <Box>Title</Box>
+                <Box sx={{ display: "flex" }}>
+                  <div>Title </div>
+                  <span
+                    style={{
+                      display: "block",
+                      color: "rgb(231, 82, 69)",
+                      fontSize: 15,
+                    }}
+                  >
+                    *
+                  </span>
+                </Box>
                 <OutlinedInput
                   size="small"
                   fullWidth
                   sx={{ backgroundColor: "#F5F5F5", border: 0 }}
                   onChange={(e) => setTitile(e.target.value)}
+                  value={title}
                 />
               </Box>
               <Box sx={{ marginLeft: 2, width: "100%" }}>
@@ -82,7 +90,19 @@ const AddPostForm = ({
             </Box>
             {postType === "video" && (
               <Box sx={{ width: "100%", mt: 3 }}>
-                <Box>Enter Video url</Box>
+                <Box display={"flex"}>
+                  <div>Enter Video url </div>
+                  <span
+                    style={{
+                      display: "block",
+                      color: "rgb(231, 82, 69)",
+                      fontSize: 15,
+                      marginLeft: "5px",
+                    }}
+                  >
+                    *
+                  </span>
+                </Box>
                 <Box sx={{ position: "relative" }}>
                   <OutlinedInput
                     size="small"
@@ -103,34 +123,62 @@ const AddPostForm = ({
                 </Box>
               </Box>
             )}
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Flag type</InputLabel>
+            <Box sx={{ width: "100%", marginTop: "20px" }}>
+              <Box>Add Flag</Box>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                size="small"
+                fullWidth
                 value={flagType}
-                label="Flag type"
                 onChange={handleFlagTypeChange}
+                input={
+                  <OutlinedInput
+                    sx={{ backgroundColor: "#F5F5F5", border: "1px black" }}
+                  />
+                }
               >
                 <MenuItem value={"popular"}>Popular</MenuItem>
                 <MenuItem value={"trendy"}>Trendy</MenuItem>
                 <MenuItem value={"top"}>Top</MenuItem>
               </Select>
-            </FormControl>
+            </Box>
             <Box sx={{ mt: 5 }}>
-              <Box>Explanation</Box>
+              <Box sx={{ display: "flex" }}>
+                <div>Explanation </div>
+                <span
+                  style={{
+                    display: "block",
+                    color: "rgb(231, 82, 69)",
+                    fontSize: 15,
+                    marginLeft: "5px",
+                  }}
+                >
+                  *
+                </span>
+              </Box>
               <TextEditor value={value} setValue={setValue} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             {postType === "image" ? (
               <Box sx={{ marginLeft: 2, width: "100%" }}>
-                <Box>Add image</Box>
+                <Box display={"flex"}>
+                  <div>Add image </div>
+                  <span
+                    style={{
+                      display: "block",
+                      color: "rgb(231, 82, 69)",
+                      fontSize: 15,
+                      marginLeft: "5px",
+                    }}
+                  >
+                    *
+                  </span>
+                </Box>
                 <FileUploader
                   handleChange={handleChange}
                   name="file"
-                  mu
                   types={["JPG", "PNG", "GIF"]}
+                  fileOrFiles={file}
                 />
               </Box>
             ) : (
@@ -141,6 +189,7 @@ const AddPostForm = ({
                   name="file"
                   types={["JPG", "PNG", "GIF"]}
                   multiple
+                  fileOrFiles={file}
                 />
               </Box>
             )}
