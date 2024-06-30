@@ -5,14 +5,14 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-import { COLORS } from "../constants";
+import { BOXSHADOW, COLORS } from "../constants";
 
 export default function Card3({ cardData }) {
   const classes = useStyles();
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ mt: 5, width: "100%", display: "flex" }}>
+    <Card sx={{ mt: 5, width: "100%", display: "flex", boxShadow: BOXSHADOW }}>
       <CardMedia
         image={cardData?.bgImg}
         title="green iguana"

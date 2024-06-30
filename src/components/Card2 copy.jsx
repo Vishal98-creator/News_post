@@ -10,18 +10,19 @@ import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
+    // boxShadow: "0px 2px 10px rgb(0 0 0 / 40%)",
     display: "flex",
     justifyContent: "center",
     width: "360px",
     padding: "7px",
     border: "none",
-    boxSizing: 'border-box',
   },
   cardImg: {
     width: "100%",
     height: "262px",
     objectFit: "cover",
     borderRadius: "12px",
+    // boxShadow: "0px 2px 10px rgb(0 0 0 / 40%)",
   },
   cardContent: {
     cursor: "pointer",
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Card2 = ({ cardData }) => {
-console.log('cardData: rere', cardData);
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -40,17 +40,16 @@ console.log('cardData: rere', cardData);
       className={classes.card}
       sx={{ boxShadow: BOXSHADOW }}
     >
-      <Box sx={{width:'100%'}}>
+      <Box>
         <CardMedia
           component="img"
           image={cardData.bgImg}
           title="green iguana"
           className={classes.cardImg}
-          draggable="false" // Prevent default image dragging behavior
         />
         <CardContent
           className={classes.cardContent}
-          onClick={() => navigate(`/view-post/${cardData._id}`)}
+          onClick={() => navigate(`/view-post/${cardData.id}`)}
         >
           <Typography variant="h5">{cardData.title}</Typography>
           <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>

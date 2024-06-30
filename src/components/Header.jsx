@@ -55,7 +55,6 @@ const Header = () => {
   };
 
   const handlePopoverClose = () => {
-    console.log("This is cloesed ======>>>");
     setAnchorEl(null);
     setCurrentMenu(null);
     setHoveredMenu(null);

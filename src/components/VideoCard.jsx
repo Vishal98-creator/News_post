@@ -5,6 +5,7 @@ import { COLORS } from "../constants";
 import { makeStyles } from "@mui/styles";
 
 const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl }) => {
+console.log('videoUrl: ', videoUrl);
   const classes = useStyles();
   return (
     <Box
@@ -53,11 +54,12 @@ const useStyles = makeStyles((theme) => ({
   cardcontent: {
     position: "absolute",
     bottom: 0,
-    height: "117px",
+    height: "85px",
     borderRadius: "12px",
     backgroundColor: "rgba(255, 255, 255, 0.75)",
     margin: "10px",
     color: "black",
     width: "-webkit-fill-available",
+    padding:'15px'
   },
 }));

@@ -2,17 +2,11 @@ import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import Card1 from "./Card1"; // Adjust the import path as needed
-import blackbgcar from "../assets/images/blackbg-car.png";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 
-// const cardDataArray = [
-//   { bgImg: blackbgcar, title: "Title 1", description: "Description 1" },
-//   { bgImg: blackbgcar, title: "Title 2", description: "Description 2" },
-//   { bgImg: blackbgcar, title: "Title 3", description: "Description 3" },
-// ];
-
 export default function ImageSlider(props) {
-  const {cardDataArray} = props;
+  const { cardDataArray } = props;
+  
   const classes = useStyles();
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -27,7 +21,6 @@ export default function ImageSlider(props) {
       prev === 0 ? cardDataArray.length - 1 : prev - 1
     );
   };
-
 
   return (
     <div className={classes.sliderContainer}>

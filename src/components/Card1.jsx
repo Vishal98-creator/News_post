@@ -5,8 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 export default function Card1({ cardData }) {
+  const navigate = useNavigate();
   const classes = useStyles();
   return (
     <Card className={classes.cardcontainer} sx={{ borderRadius: "12px" }}>
@@ -17,7 +19,13 @@ export default function Card1({ cardData }) {
         alt="Paella dish"
       />
       <CardContent className={classes.cardcontent}>
-        <Typography variant="h5">{cardData?.title}</Typography>
+        <Typography
+          variant="h5"
+          onClick={() => navigate(`/view-post/${cardData._id}`)}
+          sx={{ cursor: "pointer" }}
+        >
+          {cardData?.title}
+        </Typography>
         <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
           {cardData?.description}
         </Typography>

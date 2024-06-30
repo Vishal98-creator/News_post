@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 import VideoCard from "./VideoCard";
+import { Box } from "@mui/material";
 
 export default function VideoCard3({ cardData, navigate, videoUrl }) {
   const classes = useStyles();
@@ -13,12 +14,15 @@ export default function VideoCard3({ cardData, navigate, videoUrl }) {
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media}>
-        <VideoCard height={"100%"} width={"100%"} navigate={navigate} videoUrl={videoUrl} />
+        {/* <VideoCard height={"100%"} width={"100%"} navigate={navigate} videoUrl={videoUrl} /> */}
+        <VideoCard height={"200px"} width={"200px"} navigate={navigate} videoUrl={videoUrl} />
       </CardMedia>
       <CardContent className={classes.content}>
-        <Typography variant="h5" className={classes.title}>
+        <Box className={classes.title}
+         onClick={() => navigate(`/view-post/${cardData._id}`)}
+        >
           {cardData.title}
-        </Typography>
+        </Box>
         <Typography variant="body2" className={classes.description}>
           Preview..
         </Typography>
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     border: "1px solid #e0e0e0",
     width: "100%",
-    height: "180px",
+    height: "195px",
     paddingTop: '20px'
    
   },
@@ -59,7 +63,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: "1.25rem",
-    fontWeight: 600,
+    fontWeight: 500,
+    wordBreak:'break-word',
+    whiteSpace:'normal',
+    lineHeight:'1.2'
   },
   description: {
     color: COLORS.lightGray,

@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import Card1 from "../../components/Card1";
 import CardSlider from "../../components/CardSlider";
 import blackbgcar from "../../assets/images/blackbg-car.png";
+import { useNavigate } from "react-router-dom";
 
 const cardDataArray = [
   { bgImg: blackbgcar, title: "Title 1", description: "Description 1" },
@@ -11,6 +12,8 @@ const cardDataArray = [
 ];
 const TopView = (props) => {
   const { cardData } = props;
+  console.log('cardData: ddddd', cardData);
+  const navigate = useNavigate()
 
   return (
     
@@ -22,6 +25,7 @@ const TopView = (props) => {
         md={3}
         display={"flex"}
         justifyContent={"center"}
+        
       >
         <Card1 cardData={cardData[0]} />
       </Grid>
@@ -48,14 +52,11 @@ const TopView = (props) => {
           display={"flex"}
           justifyContent={"center"}
         >
-          {/* <Card1 cardData={cardData[0]}/> */}
           <CardSlider
             cardDataArray={
               cardData.length > 2 ? cardData.slice(2) : cardDataArray
             }
           />
-          {/* <CardSlider cardDataArray={dataCard}/> */}
-          {/* <CardSlider cardDataArray={cardDataArray}/> */}
         </Grid>
       ) : (
         ""
