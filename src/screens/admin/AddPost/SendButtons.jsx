@@ -21,7 +21,7 @@ const SendButtons = ({ postType, setPostType, handleChangePostType }) => {
         }
         onClick={() => handleChangePostType("image")}
       >
-        Send Post
+        Качи статия
       </Button>
       <Button
         sx={
@@ -31,7 +31,7 @@ const SendButtons = ({ postType, setPostType, handleChangePostType }) => {
         }
         onClick={() => handleChangePostType("video")}
       >
-        Send Video
+        Качи видео
       </Button>
     </Box>
   );

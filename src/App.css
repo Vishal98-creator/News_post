@@ -88,3 +88,9 @@ p {
 .slick-prev:before, .slick-next:before{
   color:#787474 !important ;
 }
+
+@media (max-width: 1200px) {
+  body {
+   padding: 20px 10px;
+  }
+}

@@ -41,18 +41,18 @@ const ProfileHeader = () => {
             justifyContent={"center"}
           >
             <Box>
-              <Box className={classes.optionText}>Marked</Box>
+              <Box className={classes.optionText}>Маркирани</Box>
               <Box className={classes.nonactiveOpt}></Box>
             </Box>
             <Box>
               <Box className={classes.optionText} ml={2}>
-                Send Post
+                Статия
               </Box>
               <Box className={classes.activeOpt}></Box>
             </Box>
             <Box>
               <Box className={classes.optionText} ml={2}>
-                Posts
+              Пост
               </Box>
               <Box className={classes.nonactiveOpt}></Box>
             </Box>
@@ -66,7 +66,7 @@ const ProfileHeader = () => {
                 borderRadius: "12px",
               }}
             >
-              Edit Profile
+              Редакция на профила
             </Button>
           </Box>
         </Box>

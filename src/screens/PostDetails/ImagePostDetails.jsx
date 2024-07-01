@@ -27,7 +27,7 @@ const ImagePostDetails = ({ postDetails}) => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={8}>
             <Box className={classes.mainImgContainer}>
-              <Box className={classes.mainImgTitle}>Заглавие на статията</Box>
+              <Box className={classes.mainImgTitle} sx={{}}>Заглавие на статията</Box>
               <Box sx={{ width: "100%", height: "598px", mt: 3, mb: 3 }}>
                 <img
                   src={postDetails?.mainImage}
@@ -83,7 +83,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "12px",
   },
   mainImgTitle: {
-    fontSize: "36px",
+    fontSize: {
+      md:'36px',
+      sm:'20px',
+      xs:'30px'
+    },
     fontWeight: "600",
     lineHeight: "42.19px",
     // marginTop: "10px",

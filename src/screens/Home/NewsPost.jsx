@@ -23,7 +23,7 @@ const NewsPost = ({ cardData, title }) => {
             </Button>
           </Box>
         </Box>
-        <Grid container spacing={2}>
+        <Grid container spacing={5}>
           {cardData?.map((card, i) => {
             return (
               <Grid
@@ -55,6 +55,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "10px",
     fontWeight: 500,
     fontSize: "20px",
-    marginBottom: "30px",
+    marginBottom: "40px",
   },
 }));

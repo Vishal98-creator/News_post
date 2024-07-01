@@ -22,8 +22,8 @@ import LatestVideos from "./LatestVideos";
 import Header from "../../components/Header";
 import { apiCall } from "../../utils/httpClient";
 import apiEndPoints from "../../utils/apiEndPoints";
-
-
+import { toast } from "react-toastify";
+import TopViewSkeleton from "./skeletons/TopViewSkeleton";
 
 const Index = () => {
   // const [popularVideos, setPopularVideos] = useState([]);
@@ -35,12 +35,16 @@ const Index = () => {
   console.log("popularImages: ", popularImages);
   const [newPostImages, setNewPostImages] = useState([]);
   const [latestVideo, setLatestVideo] = useState([]);
-  console.log('latestVideo: ', latestVideo);
+  console.log("latestVideo: ", latestVideo);
   const [teandingImages, setTrandingImages] = useState([]);
   const [trandingVideos, setTrandingVideos] = useState([]);
-  console.log('trandingVideos: ', trandingVideos);
+  console.log("trandingVideos: ", trandingVideos);
   const [topCardData, setTopCardData] = useState([]);
-  console.log('topCardData: ', topCardData);
+  const [isLoading, setIsLoading] = useState({
+    isTopCardLoading: false,
+    isPopularCardLoading: false,
+  });
+  console.log("topCardData: ", topCardData);
 
   useEffect(() => {
     getData();
@@ -55,8 +59,8 @@ const Index = () => {
   };
 
   const getPopularPost = async () => {
+    setIsLoading({ ...isLoading, isPopularCardLoading: true });
     const data = {
-      
       limit: 50,
       offset: 0,
       filters: {
@@ -70,33 +74,34 @@ const Index = () => {
         apiEndPoints.GETPOSTLIST,
         JSON.stringify(data)
       );
-      console.log("response:==> ", response);
       if (response) {
         const formattedData =
           response?.data?.posts?.length > 0
             ? response?.data?.posts.map((item) => {
                 return {
-                  ...item, 
+                  ...item,
                   bgImg: item?.mainImage || blackbgcar,
                   description: "Началото на статията....",
                 };
               })
             : [];
         setPopularImages(formattedData);
+        setIsLoading({ ...isLoading, isPopularCardLoading: false });
       } else {
         // setTrandingVideos(TopViewCardData);
       }
     } catch (error) {
+      setIsLoading({ ...isLoading, isPopularCardLoading: false });
       console.error("GETPOSTLIST error :- ", error);
     }
   };
 
   const getNewPostImages = async () => {
+    setIsLoading({ ...isLoading, isTopCardLoading: true });
     const data = {
       limit: 50,
       offset: 0,
       filters: {
-        // flag: "", //popular, tranding, featured
         postType: "image", //image. video
       },
     };
@@ -109,14 +114,16 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            ...item, 
+            ...item,
             bgImg: item?.mainImage || blackbgcar,
             description: "Началото на статията....",
           };
         });
+        setIsLoading({ ...isLoading, isTopCardLoading: false });
         setNewPostImages(formattedData);
         setTopCardData(formattedData);
       } else {
+        toast.error("Top card loading error.");
         // setTrandingVideos(TopViewCardData);
       }
     } catch (error) {
@@ -142,7 +149,7 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            ...item, 
+            ...item,
             bgImg: item?.mainImage || blackbgcar,
             description: "Началото на статията....",
           };
@@ -174,7 +181,7 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            ...item, 
+            ...item,
             bgImg: item?.mainImage || blackbgcar,
             description: "Началото на статията....",
           };
@@ -206,7 +213,7 @@ const Index = () => {
       if (response) {
         const formattedData = response?.data?.posts.map((item) => {
           return {
-            ...item, 
+            ...item,
             bgImg: item?.mainImage || blackbgcar,
             description: "Началото на статията....",
           };
@@ -225,12 +232,18 @@ const Index = () => {
       <Box>
         <Header />
         <CategorySlider TOP_CATEGORIES={TOP_CATEGORIES} />
-        <TopView
-          cardData={topCardData.length > 0 ? topCardData : []}
-        />
+        {isLoading.isTopCardLoading ? (
+          <TopViewSkeleton />
+        ) : (
+          topCardData.length > 0 && (
+            <TopView cardData={topCardData.length > 0 ? topCardData : []} />
+          )
+        )}
+
         <Popularposts
           title="Popular Images"
           cardData={topCardData.length !== 0 ? topCardData : []}
+          isLoading={isLoading.isPopularCardLoading}
         />
         <SportWidget />
         <NewsPost

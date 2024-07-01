@@ -41,7 +41,7 @@ const AddPostForm = ({
             <Box display={"flex"} alignItems={"center"} fullWidth>
               <Box sx={{ width: "100%" }}>
                 <Box sx={{ display: "flex" }}>
-                  <div>Title </div>
+                  <div>заглавие </div>
                   <span
                     style={{
                       display: "block",
@@ -61,7 +61,7 @@ const AddPostForm = ({
                 />
               </Box>
               <Box sx={{ marginLeft: 2, width: "100%" }}>
-                <Box>Add Tags</Box>
+                <Box>Добави Тагове</Box>
                 <Box sx={{ position: "relative" }}>
                   <OutlinedInput
                     size="small"
@@ -91,7 +91,7 @@ const AddPostForm = ({
             {postType === "video" && (
               <Box sx={{ width: "100%", mt: 3 }}>
                 <Box display={"flex"}>
-                  <div>Enter Video url </div>
+                  <div>Въведете URL адрес на видеоклипа</div>
                   <span
                     style={{
                       display: "block",
@@ -124,7 +124,7 @@ const AddPostForm = ({
               </Box>
             )}
             <Box sx={{ width: "100%", marginTop: "20px" }}>
-              <Box>Add Flag</Box>
+              <Box>Добавяне на флаг</Box>
               <Select
                 size="small"
                 fullWidth
@@ -137,13 +137,13 @@ const AddPostForm = ({
                 }
               >
                 <MenuItem value={"popular"}>Popular</MenuItem>
-                <MenuItem value={"trendy"}>Trendy</MenuItem>
+                <MenuItem value={"trending"}>Tranding</MenuItem>
                 <MenuItem value={"top"}>Top</MenuItem>
               </Select>
             </Box>
             <Box sx={{ mt: 5 }}>
               <Box sx={{ display: "flex" }}>
-                <div>Explanation </div>
+                <div>Описания </div>
                 <span
                   style={{
                     display: "block",
@@ -162,7 +162,7 @@ const AddPostForm = ({
             {postType === "image" ? (
               <Box sx={{ marginLeft: 2, width: "100%" }}>
                 <Box display={"flex"}>
-                  <div>Add image </div>
+                  <div>Добави снимка</div> 
                   <span
                     style={{
                       display: "block",
@@ -179,17 +179,19 @@ const AddPostForm = ({
                   name="file"
                   types={["JPG", "PNG", "GIF"]}
                   fileOrFiles={file}
+                  label="Добави снимка за статията"
                 />
               </Box>
             ) : (
               <Box sx={{ marginLeft: 2, width: "100%" }}>
-                <Box>Image Gallery</Box>
+                <Box>Галерия с изображения</Box>
                 <FileUploader
                   handleChange={handleImageGallery}
                   name="file"
                   types={["JPG", "PNG", "GIF"]}
                   multiple
                   fileOrFiles={file}
+                  label="Добави снимка за статията"
                 />
               </Box>
             )}
@@ -225,7 +227,7 @@ const AddPostForm = ({
                 onClick={handlePublic}
                 sx={{ mt: 3, background: COLORS.red, color: COLORS.white }}
               >
-                Public
+                Публикувай   
               </Button>
             </Box>
           </Grid>

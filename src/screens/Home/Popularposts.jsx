@@ -4,6 +4,7 @@ import Card2 from "../../components/Card2";
 import { Box, Button } from "@mui/material";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { COLORS } from "../../constants";
+import PopularPostSkeleton from "./skeletons/PopularPostSkeleton";
 
 const useStyles = makeStyles((theme) => ({
   sectionTitle: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Responsive({ cardData, title }) {
+function Responsive({ cardData, title, isLoading }) {
   const classes = useStyles();
   const containerRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -101,6 +102,7 @@ function Responsive({ cardData, title }) {
           </Button>
         </Box>
       </Box>
+      {!isLoading ?
       <Box
         ref={containerRef}
         className={classes.hideScrollbar} // Apply hide scrollbar class
@@ -108,7 +110,11 @@ function Responsive({ cardData, title }) {
           display: 'flex',
           overflowX: 'auto',
           whiteSpace: 'nowrap',
-          padding: 2,
+          padding: {
+            md:2,
+            sm:0,
+            xs:0
+          },
           cursor: isDragging ? 'grabbing' : 'grab', // Change cursor during dragging
         }}
         onMouseDown={handleMouseDown}
@@ -133,6 +139,8 @@ function Responsive({ cardData, title }) {
           </Box>
         ))}
       </Box>
+      :
+      <PopularPostSkeleton />}
     </Box>
   );
 }

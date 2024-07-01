@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import AddPost from "./screens/admin/AddPost/Index";
 import AboutUs from "./screens/AboutUs/Index";
+import ContactUs from "./screens/ContactUs/Index";
 
 const router = createBrowserRouter([
   {
@@ -30,11 +31,15 @@ const router = createBrowserRouter([
     path: "/aboutus",
     element: <AboutUs />,
   },
+  {
+    path: "/contactus",
+    element: <ContactUs />,
+  },
 ]);
 
 const Router = () => {
   return (
-    <div className="" style={{ marginBottom: "300px" }}>
+    <div className="">
       {/* <Header /> */}
       <RouterProvider router={router} />
       <Footer />
