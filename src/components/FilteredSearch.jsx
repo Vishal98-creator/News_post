@@ -11,13 +11,14 @@ import VideoCard from "./VideoCard";
 import {trimTitle} from "../utils/helperFunctios";
 // import Card3 from "../../components/Card3";
 
-const FilteredSearch = ({ cardData, title }) => {
+const FilteredSearch = ({ cardData, title, isVisible, setIsVisible, setSearchQuery}) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const search_input = useRef(null);
   useEffect(() => {
    function handleClickOutside(event) {
      if (search_input.current && !search_input.current.contains(event.target)) {
+      console.log('This is rendering =====>>')
       //  setSearchResults([]);
      }
    }
@@ -27,6 +28,7 @@ const FilteredSearch = ({ cardData, title }) => {
    };
  }, [search_input]);
   return (
+    <>
     <Box
     ref={search_input}
       sx={{
@@ -41,11 +43,7 @@ const FilteredSearch = ({ cardData, title }) => {
       }}
       className={classes.newsPostContainer}
     >
-      <Box display={"flex"} justifyContent={"space-between"}>
-        {/* <Box varient="h4" className={classes.sectionTitle}>
-          {title}
-        </Box> */}
-      </Box>
+    
       <Grid container direction="column" spacing={2}>
         {cardData?.map((card, i) => {
             console.log("This is running :----",card)
@@ -63,7 +61,10 @@ const FilteredSearch = ({ cardData, title }) => {
                   />
                   <CardContent
                     className={classes.cardcontent}
-                    onClick={() => navigate(`/view-post/${card?._id}`)}
+                    onClick={() => {navigate(`/view-post/${card?._id}`)
+                    setIsVisible(false)
+                    setSearchQuery("")
+                  }}
                   >
                     <Typography>{trimTitle(card?.title)}</Typography>
                     <Typography
@@ -91,7 +92,10 @@ const FilteredSearch = ({ cardData, title }) => {
                       videoUrl={card?.mainVideo}
                     />
                   </CardMedia>
-                  <CardContent className={classes.content}  onClick={() => navigate(`/view-post/${card?._id}`)}>
+                  <CardContent className={classes.content}  onClick={() => {navigate(`/view-post/${card?._id}`)
+                       setIsVisible(false)
+                       setSearchQuery("")
+                }}>
                     <Typography className={classes.title}>
                       {trimTitle(card?.title)}
                     </Typography>
@@ -106,6 +110,7 @@ const FilteredSearch = ({ cardData, title }) => {
         })}
       </Grid>
     </Box>
+    </>
   );
 };
 
@@ -129,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
   cardImg: {
     margin: "8px",
     borderRadius: "12px",
-    width: "100px",
+    width: "120px",
     height: "50px",
   },
   cardcontent: {

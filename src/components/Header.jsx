@@ -3,6 +3,8 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
+import Menu from "@mui/material/Menu"
+import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import { COLORS } from "../constants";
@@ -47,6 +49,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentMenu, setCurrentMenu] = useState(null);
   const [hoveredMenu, setHoveredMenu] = useState(null);
+  const [dropDownType, setDropDownType] = useState("");
 
   const handlePopoverOpen = (event, menu) => {
     setAnchorEl(event.currentTarget);
@@ -59,6 +62,20 @@ const Header = () => {
     setCurrentMenu(null);
     setHoveredMenu(null);
   };
+
+  const [anchorMenuEl, setAnchorMenuEl] = React.useState(null);
+
+  function handleClick(event) {
+    if (anchorEl !== event.currentTarget) {
+      setAnchorMenuEl(event.currentTarget);
+    }
+  }
+
+  function handleClose() {
+    setDropDownType(null)
+    setAnchorMenuEl(null);
+  }
+
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = (open) => (event) => {
@@ -128,7 +145,7 @@ const Header = () => {
                 lineHeight: "25.78px",
                 cursor: "pointer",
               }}
-              onClick={()=> navigate("/admin/add-post")}
+              onClick={() => navigate("/admin/add-post")}
             >
               PartyNews
             </Typography>
@@ -207,7 +224,7 @@ const Header = () => {
               </Box>
               <Box
                 sx={{
-                  width: "102%",
+                  width: "100%",
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-start",
@@ -223,56 +240,65 @@ const Header = () => {
                 display: { xs: "none", sm: "none", md: "flex" },
                 alignItems: "center",
                 justifyContent: "space-between",
-                width: "40%",
-                marginLeft: "15px",
+                width: "50%",
+                marginLeft: "25px",
+                // paddingRight: '15px',
+                // backgroundColor: 'red'
               }}
             >
               {data.map((menu) => (
-                <Box
-                  key={menu}
-                  onMouseEnter={(event) => handlePopoverOpen(event, menu)}
-                  onMouseLeave={handlePopoverClose}
-                  sx={{
-                    fontSize: "16px",
-                    fontWeight: 500,
-                    lineHeight: "18.75px",
-                    textAlign: "left",
-                    color: COLORS.black,
-                    backgroundColor:
-                      hoveredMenu === menu
-                        ? "rgba(220, 220, 220, 1)"
-                        : COLORS.white,
-                    display: "flex",
-                    alignItems: "center",
-                    borderRadius: "7px",
-                    width: "15  %",
-                    paddingLeft: "5px",
-                    paddingRight: "5px",
-                    height: "30px",
-                  }}
-                >
-                  {menu}
-                  <KeyboardArrowDownIcon
-                    sx={{ color: COLORS.lightGrayLighter }}
-                  />
-                  <StyledPopover
-                    id="simple-popover"
-                    anchorEl={currentMenu === menu ? anchorEl : null}
-                    open={currentMenu === menu}
-                    onClose={handlePopoverClose}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
+                <>
+                  <Box
+                    aria-owns={anchorMenuEl ? "simple-menu" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                    // onMouseOver={handleClick}
+                    onMouseEnter={() => setDropDownType(menu)}
+                    onMouseLeave={() => setDropDownType(null)}
+                    sx={{
+                      // position: 'absolute',
+                      zIndex: '1000',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontSize: "16px",
+                      fontWeight: 500,
+                    
+                      color: COLORS.black,
+                      backgroundColor:
+                      dropDownType === menu
+                          ? "rgba(220, 220, 220, 1)"
+                          : COLORS.white,
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius: "7px",
+                      width: "30%",
+                      paddingRight:`${menu !== "Шоу" ? `15px`: ``}`,
+                      // width:`${menu === "Репортажи" ? `33%`: `30%`}`,
+                      // paddingRight: "5px",
+                      height: "30px",
+                      // marginRight: `${menu === "Фильмы" ? `14px`: ``}`
                     }}
                   >
-                    <StyledMenuItem onClick={handlePopoverClose}>
-                      Option 1
-                    </StyledMenuItem>
-                    <StyledMenuItem onClick={handlePopoverClose}>
-                      Option 2
-                    </StyledMenuItem>
-                  </StyledPopover>
-                </Box>
+                    <Box sx={{display: 'flex', flex: 1,flexDirection: 'row', justifyContent: 'center', alignItems: 'center',paddingLeft: '5px'}}> 
+                     {menu}
+                     {menu !==   "Фильмы" ?
+                      <KeyboardArrowDownIcon
+                        sx={{ color: COLORS.lightGrayLighter }}
+                      /> : ""}</Box>
+
+                    {dropDownType === menu && menu !==  "Фильмы" ?
+                    <Box sx={{display:'flex', flexDirection: 'column', width: "100px", marginTop: '5px', boxShadow: "0 1px 3px rgba(0,0,0,0.2)",height: "300px"}}>
+                      <Button  onClick={() => setDropDownType(null)}> Option 1</Button>
+                      <Button  onClick={() => setDropDownType(null)}> Option 2</Button>
+                      </Box>
+                      : ""
+                    }
+                  </Box>
+                 
+                </>
+               
               ))}
             </Box>
             <Box
