@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
   cardImg: {
     margin: "8px",
     borderRadius: "12px",
-    width: "120px",
+    width: "110px",
     height: "50px",
   },
   cardcontent: {
