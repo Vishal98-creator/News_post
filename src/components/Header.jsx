@@ -44,7 +44,8 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 
 const Header = () => {
   const navigate = useNavigate();
-  const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
+  // const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
+  const data = ["Предавания", "Филми", "Репортажи", "Клюки", "Музика", "Абонаменти"];
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentMenu, setCurrentMenu] = useState(null);
@@ -240,13 +241,13 @@ const Header = () => {
                 display: { xs: "none", sm: "none", md: "flex" },
                 alignItems: "center",
                 justifyContent: "space-between",
-                width: "50%",
-                marginLeft: "25px",
+                width: "60%",
+                marginLeft: "30px",
                 // paddingRight: '15px',
                 // backgroundColor: 'red'
               }}
             >
-              {data.map((menu) => (
+              {data.map((menu, index) => (
                 <>
                   <Box
                     aria-owns={anchorMenuEl ? "simple-menu" : undefined}
@@ -274,7 +275,7 @@ const Header = () => {
                       alignItems: "center",
                       borderRadius: "7px",
                       width: "30%",
-                      paddingRight:`${menu !== "Шоу" ? `15px`: ``}`,
+                      paddingRight:`${index !== 0 ? `15px`: ``}`,
                       // width:`${menu === "Репортажи" ? `33%`: `30%`}`,
                       // paddingRight: "5px",
                       height: "30px",
@@ -283,12 +284,12 @@ const Header = () => {
                   >
                     <Box sx={{display: 'flex', flex: 1,flexDirection: 'row', justifyContent: 'center', alignItems: 'center',paddingLeft: '5px'}}> 
                      {menu}
-                     {menu !==   "Фильмы" ?
+                     {index !==  1 ?
                       <KeyboardArrowDownIcon
                         sx={{ color: COLORS.lightGrayLighter }}
                       /> : ""}</Box>
 
-                    {dropDownType === menu && menu !==  "Фильмы" ?
+                    {dropDownType === menu && index !==  1 ?
                     <Box sx={{display:'flex', flexDirection: 'column', width: "100px", marginTop: '5px', boxShadow: "0 1px 3px rgba(0,0,0,0.2)",height: "300px"}}>
                       <Button  onClick={() => setDropDownType(null)}> Option 1</Button>
                       <Button  onClick={() => setDropDownType(null)}> Option 2</Button>
