@@ -66,7 +66,7 @@ const FilteredSearch = ({ cardData, title, isVisible, setIsVisible, setSearchQue
                     setSearchQuery("")
                   }}
                   >
-                    <Typography>{trimTitle(card?.title)}</Typography>
+                    <Typography>{trimTitle(card?.title, 120)}</Typography>
                     <Typography
                       variant="body2"
                       sx={{ mt: 0, color: COLORS.lightGray }}
@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
   cardImg: {
     margin: "8px",
     borderRadius: "12px",
-    width: "110px",
+    width: "108px",
     height: "50px",
   },
   cardcontent: {
