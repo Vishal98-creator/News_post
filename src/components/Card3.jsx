@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { BOXSHADOW, COLORS } from "../constants";
+import { trimTitle } from "../utils/helperFunctios";
 
 export default function Card3({ cardData }) {
   const classes = useStyles();
@@ -22,7 +23,7 @@ export default function Card3({ cardData }) {
         className={classes.cardcontent}
         onClick={() => navigate(`/view-post/${cardData.id}`)}
       >
-        <Typography variant="h5">{cardData?.title}</Typography>
+        <Typography variant="h5">{trimTitle(cardData?.title,120)}</Typography>
         <Typography variant="body2" sx={{ mt: 2, color: COLORS.lightGray }}>
           {cardData?.description}
         </Typography>

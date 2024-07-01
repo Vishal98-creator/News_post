@@ -3,9 +3,10 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { COLORS } from "../constants";
 import { makeStyles } from "@mui/styles";
+import { trimTitle } from "../utils/helperFunctios";
 
-const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl }) => {
-console.log('videoUrl: ', videoUrl);
+const VideoCard = ({ height, showTitleBar, navigate, width, videoUrl, cardData }) => {
+  console.log('cardData: ====>>> ', cardData);
   const classes = useStyles();
   return (
     <Box
@@ -36,9 +37,9 @@ console.log('videoUrl: ', videoUrl);
           controls
         />
       </div>
-      {showTitleBar && (
+      {showTitleBar && cardData.length > 0 && (
         <Box className={classes.cardcontent}>
-          <Typography variant="h5">{"Заглавие на новина"}</Typography>
+          <Typography variant="h5">{trimTitle(cardData[0]?.title,150)}</Typography>
           <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
             Началото на статията....
           </Typography>

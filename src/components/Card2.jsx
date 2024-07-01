@@ -7,6 +7,7 @@ import { makeStyles } from "@mui/styles";
 import { BOXSHADOW, COLORS } from "../constants";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { trimTitle } from "../utils/helperFunctios";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -52,7 +53,7 @@ console.log('cardData: rere', cardData);
           className={classes.cardContent}
           onClick={() => navigate(`/view-post/${cardData._id}`)}
         >
-          <Typography variant="h5">{cardData.title}</Typography>
+          <Typography variant="h5">{trimTitle(cardData?.title)}</Typography>
           <Typography variant="body2" sx={{ mt: 1, color: COLORS.lightGray }}>
             {cardData.description}
           </Typography>

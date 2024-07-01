@@ -174,6 +174,7 @@ console.log('cardData: vv', cardData);
             showTitleBar
             navigate={navigate}
             videoUrl={cardData[0]?.mainVideo} 
+            cardData={cardData}
           />
         </Box>
         {renderRows(cardData.slice(1))}

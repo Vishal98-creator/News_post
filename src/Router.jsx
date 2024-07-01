@@ -11,7 +11,7 @@ import {
   Link,
 } from "react-router-dom";
 import AddPost from "./screens/admin/AddPost/Index";
-import AboutUs from './screens/AboutUs/Index'
+import AboutUs from "./screens/AboutUs/Index";
 
 const router = createBrowserRouter([
   {

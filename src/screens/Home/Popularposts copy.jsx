@@ -8,6 +8,7 @@ import { Box, Button } from "@mui/material";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { COLORS } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import { trimTitle } from "../../utils/helperFunctios";
 
 function Responsive({ cardData, title }) {
   const sliderRef = useRef(null);
@@ -52,7 +53,7 @@ function Responsive({ cardData, title }) {
     <Box sx={{ mt: 8, minHeight: "100%" }}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Box varient="h4" className={classes.sectionTitle}>
-          {title}
+          {trimTitle(title)}
         </Box>
         <Box>
           <Button onClick={() => sliderRef.current.slickPrev()}>

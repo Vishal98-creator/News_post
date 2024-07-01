@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 import { useNavigate } from "react-router-dom";
+import { trimTitle } from "../utils/helperFunctios";
 
 export default function Card1({ cardData }) {
   const navigate = useNavigate();

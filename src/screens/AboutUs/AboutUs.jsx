@@ -5,7 +5,7 @@ import CallIcon from "@mui/icons-material/Call";
 import FaxIcon from "@mui/icons-material/Fax";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
-import aboutUsImg from "../../assets/images/aboutUs1.png";
+import img from "../../assets/images/aboutUs1.png";
 import {
   Box,
   Card,
@@ -88,7 +88,7 @@ export const AboutUs = () => {
                   component="img"
                   alt="Design Image"
                   height="100%"
-                  image={aboutUsImg}
+                  image={img}
                   title="Design Image"
                   sx={{
                     position: "relative",

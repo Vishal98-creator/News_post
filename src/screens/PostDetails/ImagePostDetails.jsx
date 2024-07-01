@@ -1,23 +1,36 @@
 import { Box, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import React ,{useEffect, useRef} from "react";
 import { COLORS } from "../../constants";
-import CarBGImg from "../../assets/images/musicGirl.png";
 import { CalendarToday } from "@mui/icons-material";
 import ImageSlider from "./ImageSlider";
+import moment from "moment";
+import 'moment/locale/bg';
 
-const ImagePostDetails = ({htmlContent}) => {  
+const ImagePostDetails = ({ postDetails}) => {  
   const classes = useStyles();
+  const search_input = useRef(null);
+  useEffect(() => {
+   function handleClickOutside(event) {
+     if (search_input.current && !search_input.current.contains(event.target)) {
+      //  setSearchResults([]);
+     }
+   }
+   document.addEventListener("mousedown", handleClickOutside);
+   return () => {
+     document.removeEventListener("mousedown", handleClickOutside);
+   };
+ }, [search_input]);
   return (
     <>
-      <Box mt={5}>
+      <Box mt={5} useRef={search_input}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={8}>
             <Box className={classes.mainImgContainer}>
               <Box className={classes.mainImgTitle}>Заглавие на статията</Box>
               <Box sx={{ width: "100%", height: "598px", mt: 3, mb: 3 }}>
                 <img
-                  src={CarBGImg}
+                  src={postDetails?.mainImage}
                   alt="imgBg"
                   loading="lazy"
                   style={{
@@ -38,19 +51,21 @@ const ImagePostDetails = ({htmlContent}) => {
               >
                 <CalendarToday />
                 <span style={{ marginTop: "5px", marginLeft: "10px" }}>
-                  14 Юли , 2024
+                  {moment(postDetails?.createdAt).format('DD MM , YYYY')}
                 </span>
               </Box>
               <Box>
-                <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                <div dangerouslySetInnerHTML={{ __html: postDetails?.content }} />
               </Box>
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
-          <Box className={classes.mainImgContainer}>
-            <Box sx={{fontSize:'12x', fontWeight:600}}>Image Gallery</Box>
-            <ImageSlider/>
-          </Box>
+         { postDetails?.images?.length > 0 && 
+            <Box className={classes.mainImgContainer}>
+              <Box sx={{ fontSize: "12x", fontWeight: 600 }}>Images</Box>
+              <ImageSlider images={postDetails?.images}/>
+            </Box>
+}
           </Grid>
         </Grid>
       </Box>
