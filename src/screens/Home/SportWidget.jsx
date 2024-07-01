@@ -15,8 +15,13 @@ const SportWidget = () => {
           justifyContent: "center",
           alignItems: "center",
           height:'464px',
-          mt:5,
-          textAlign:'center'
+          mt:10,
+          mb:8,
+          textAlign:'center',
+          position:'relative',
+          left:'-12%',
+          width:'126%'
+
         }}
       >
         preview на последния филм - YouTube

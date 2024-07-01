@@ -11,6 +11,7 @@ import {
   Link,
 } from "react-router-dom";
 import AddPost from "./screens/admin/AddPost/Index";
+import AboutUs from './screens/AboutUs/Index'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/view-post/:post_id",
     element: <PostDetails />,
+  },
+  {
+    path: "/aboutus",
+    element: <AboutUs />,
   },
 ]);
 

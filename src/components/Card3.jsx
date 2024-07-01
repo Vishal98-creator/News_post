@@ -12,7 +12,7 @@ export default function Card3({ cardData }) {
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ mt: 5, width: "100%", display: "flex", boxShadow: BOXSHADOW }}>
+    <Card sx={{  width: "100%", display: "flex", boxShadow: BOXSHADOW }}>
       <CardMedia
         image={cardData?.bgImg}
         title="green iguana"
