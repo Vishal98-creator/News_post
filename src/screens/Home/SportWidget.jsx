@@ -19,8 +19,8 @@ const SportWidget = () => {
           mb:8,
           textAlign:'center',
           position:'relative',
-          left:'-12%',
-          width:'126%'
+          left:'-3%',
+          width:'106%'
 
         }}
       >

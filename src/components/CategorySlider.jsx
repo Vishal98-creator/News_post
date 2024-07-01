@@ -22,11 +22,16 @@ const CategorySlider = ({ TOP_CATEGORIES }) => {
       sx={{
         position: "relative",
         height: "68px",
-        display: "flex",
+        // display: "flex",
         paddingLeft: "20px",
         alignItems: "center",
         overflow: "hidden",
         marginBottom: "25px",
+        display: {
+          xs: 'none', // Hide on extra-small screens
+          sm: 'none', // Hide on small screens
+          md: 'flex', // Show on medium screens and up
+        },
         // padding: "0 10px",
       }}
     >

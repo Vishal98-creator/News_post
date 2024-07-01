@@ -4,6 +4,7 @@ import Card1 from "../../components/Card1";
 import CardSlider from "../../components/CardSlider";
 import blackbgcar from "../../assets/images/blackbg-car.png";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 
 const cardDataArray = [
   { bgImg: blackbgcar, title: "Title 1", description: "Description 1" },
@@ -12,20 +13,21 @@ const cardDataArray = [
 ];
 const TopView = (props) => {
   const { cardData } = props;
-  console.log('cardData: ddddd', cardData);
-  const navigate = useNavigate()
+  const isMediumScreen = useMediaQuery("(max-width:970px)");
+  const isLargeScreen = useMediaQuery("(min-width:1420px)");
+  const ismobileScreen = useMediaQuery("(max-width:700px)");
+  const ishideSmallCards = useMediaQuery("(max-width:900px)"); // do not change
+  console.log("ishideSmallCards: ", ishideSmallCards);
 
   return (
-    
     <Grid container spacing={2} mt={2}>
       <Grid
         item
         xs={12}
         sm={6}
         md={3}
-        display={"flex"}
+        display={ishideSmallCards ? "none" : "flex"}
         justifyContent={"center"}
-        
       >
         <Card1 cardData={cardData[0]} />
       </Grid>
@@ -35,7 +37,7 @@ const TopView = (props) => {
           xs={12}
           sm={6}
           md={3}
-          display={"flex"}
+          display={ishideSmallCards ? "none" : "flex"}
           justifyContent={"center"}
         >
           <Card1 cardData={cardData[1]} />
@@ -47,14 +49,18 @@ const TopView = (props) => {
         <Grid
           item
           xs={12}
-          sm={6}
+          sm={12}
           md={6}
           display={"flex"}
           justifyContent={"center"}
         >
           <CardSlider
             cardDataArray={
-              cardData.length > 2 ? cardData.slice(2) : cardDataArray
+              ishideSmallCards
+                ? cardData
+                : cardData.length > 2
+                ? cardData.slice(2)
+                : cardDataArray
             }
           />
         </Grid>

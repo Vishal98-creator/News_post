@@ -39,7 +39,7 @@ const router = createBrowserRouter([
 
 const Router = () => {
   return (
-    <div className="" style={{ marginBottom: "300px" }}>
+    <div className="">
       {/* <Header /> */}
       <RouterProvider router={router} />
       <Footer />

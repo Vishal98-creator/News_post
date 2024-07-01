@@ -21,7 +21,11 @@ const Footer = () => {
     <Box
       sx={{
         maxWidth: { xs: "90%", md: "70%" },
-        marginTop: "100px",
+        marginTop: {
+          md:"100px",
+          sm:'50px',
+          xs:'50px'
+        },
         backgroundColor: "rgb(245, 245, 245)",
         padding: "60px",
         borderRadius: { xs: "0 30px 30px 0", md: "0 60px 60px 0" },

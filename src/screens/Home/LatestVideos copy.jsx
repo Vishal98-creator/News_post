@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import VideoCard3 from "../../components/VideoCard2";
 
 function LatestVideos({ cardData }) {
-  const navigate = useNavigate();
+const navigate = useNavigate();
   const sliderRef = useRef(null);
   const classes = useStyles();
   const isLargeScreen = useMediaQuery("(min-width:1420px)");

@@ -42,7 +42,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 
 const Header = () => {
   const navigate = useNavigate();
-  const data = ["Шоу", "Фильмы", "Репортажи", "Ключи", "Музыка", "Подписки"];
+  const data = ["Предавания", "Филми", "Репортажи", "Клюки", "Музика", "Абонаменти"];
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentMenu, setCurrentMenu] = useState(null);
