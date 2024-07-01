@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import Header from "../../components/Header";
-import { AboutUs } from "./AboutUs";
+import ContactUs from "./ContactUs";
 import Footer from "../../components/Footer";
 
 const Index = () => {
@@ -9,7 +9,7 @@ const Index = () => {
     <>
       <Grid display={"flex"} flexDirection={"column"}>
         <Header />
-        <AboutUs />
+        <ContactUs />
       </Grid>
     </>
   );

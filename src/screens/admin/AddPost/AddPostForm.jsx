@@ -137,7 +137,7 @@ const AddPostForm = ({
                 }
               >
                 <MenuItem value={"popular"}>Popular</MenuItem>
-                <MenuItem value={"trendy"}>Trendy</MenuItem>
+                <MenuItem value={"trending"}>Tranding</MenuItem>
                 <MenuItem value={"top"}>Top</MenuItem>
               </Select>
             </Box>
